@@ -2,186 +2,184 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BẢNG TÍNH LƯƠNG</title>
   <style>
-    .salary-input { 
-      display: flex; 
-      gap: 10px; 
-      margin: 10px 0; 
-      align-items: center; 
+    .salary-info table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 400px;
     }
-    .salary-input label { 
-      font-weight: bold; 
-      min-width: 120px; 
+    .salary-info th, .salary-info td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
     }
-    .salary-input input { 
-      padding: 5px; 
-      border: 1px solid #ccc; 
-      border-radius: 4px; 
+    .salary-info th {
+      background-color: #f2f2f2;
     }
-    table { 
-      width: 100%; 
-      border-collapse: collapse; 
-      margin: 10px 0; 
+    .salary-info select {
+      padding: 5px;
+      width: 100%;
     }
-    th, td { 
-      border: 1px solid #ddd; 
-      padding: 8px; 
-      text-align: left; 
-    }
-    th { 
-      background-color: #f4f4f4; 
+    .section {
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
   <h1>BẢNG TÍNH LƯƠNG</h1>
 
-  <section class="salary-section">
-    <h2>Thông tin cơ bản</h2>
-    <div class="salary-input">
-      <label for="luongCoBan">Lương cơ bản:</label>
-      <input type="number" id="luongCoBan" placeholder="Nhập lương cơ bản">
-    </div>
-    <div class="salary-input">
-      <label for="ngayCongChuan">Ngày công chuẩn:</label>
-      <input type="number" id="ngayCongChuan" placeholder="Nhập ngày công (tối đa 26)">
-    </div>
-  </section>
-
-  <section class="salary-details">
-    <h2>Khoản mục</h2>
+  <div class="section salary-info">
+    <h2>LƯƠNG CƠ BẢN & NGÀY CÔNG CHUẨN</h2>
     <table>
-      <thead>
-        <tr>
-          <th>Khoản mục</th>
-          <th>Thời gian</th>
-          <th>Thành tiền</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Ngày công 100%</td><td><input type="number" id="ngayCong"></td><td id="tienNgayCong">0</td></tr>
-        <tr><td>Tăng ca 150%</td><td><input type="number" id="tc150"></td><td id="tienTC150">0</td></tr>
-        <tr><td>Tăng ca 200%</td><td><input type="number" id="tc200"></td><td id="tienTC200">0</td></tr>
-        <tr><td>Trợ cấp đêm 30%</td><td><input type="number" id="tcDem30"></td><td id="tienDem30">0</td></tr>
-        <tr><td>Ngày công 200%</td><td><input type="number" id="ngayCong200"></td><td id="tienCong200">0</td></tr>
-        <tr><td>Tăng ca 300%</td><td><input type="number" id="tc300"></td><td id="tienTC300">0</td></tr>
-        <tr><td>Tăng ca 340%</td><td><input type="number" id="tc340"></td><td id="tienTC340">0</td></tr>
-        <tr><td>Trợ cấp đêm 70%</td><td><input type="number" id="tcDem70"></td><td id="tienDem70">0</td></tr>
-        <tr><td>Ngày phép năm</td><td><input type="number" id="phepNam"></td><td id="tienPhepNam">0</td></tr>
-        <tr><td>Ngày lễ</td><td><input type="number" id="le"></td><td id="tienLe">0</td></tr>
-        <tr><td>Phụ cấp ABC</td><td><input type="number" id="pcABC"></td><td id="tienPCABC">0</td></tr>
-        <tr><td>Phụ cấp Chuyên cần</td><td><input type="number" id="pcChuyenCan"></td><td id="tienPCChuyenCan">0</td></tr>
-        <tr><td>Phụ cấp Thâm niên</td><td><input type="number" id="pcThamNien"></td><td id="tienPCThamNien">0</td></tr>
-        <tr><td>Phụ cấp Chức vụ</td><td><input type="number" id="pcChucVu"></td><td id="tienPCChucVu">0</td></tr>
-        <tr><td>Hỗ trợ đi lại</td><td><input type="number" id="pcDiLai"></td><td id="tienPCDiLai">0</td></tr>
-        <tr><td>Hỗ trợ điện thoại</td><td><input type="number" id="pcDienThoai"></td><td id="tienPCDienThoai">0</td></tr>
-        <tr><td>Hỗ trợ trẻ em dưới 6 tuổi</td><td><input type="number" id="pcTreEm"></td><td id="tienPCTreEm">0</td></tr>
-        <tr><td>Phụ cấp khác</td><td><input type="number" id="pcKhac"></td><td id="tienPCKhac">0</td></tr>
-        <tr><td>Lương ngày lễ, tết, thông ca</td><td><span id="tienNgayLeTet">0</td></tr>
-      </tbody>
+      <tr>
+        <th>Khoản mục</th>
+        <th>Giá trị</th>
+      </tr>
+      <tr>
+        <td>Lương cơ bản</td>
+        <td>[Nhập số tiền]</td>
+      </tr>
+      <tr>
+        <td>Ngày công chuẩn</td>
+        <td>
+          <select>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+          </select>
+        </td>
+      </tr>
     </table>
-  </section>
+  </div>
 
-  <section class="salary-deductions">
-    <h2>Khấu trừ & Thực lĩnh</h2>
-    <p>Tổng thu nhập: <span id="tongLuong">0</span> VND</p>
-    <p>Khấu trừ BHXH 10.5%: <span id="tienTruBHXH">0</span> VND</p>
-    <p>Khấu trừ Công đoàn 1%: <span id="tienTruCD">0</span> VND</p>
-    <p>Thực lĩnh (chưa tính thuế): <span id="thucLinh">0</span> VND</p>
-  </section>
-
-  <section class="salary-holiday">
-    <h2>Lương ngày lễ, tết, thông ca</h2>
+  <div class="section">
+    <h3>CHI TIẾT THU NHẬP</h3>
     <table>
-      <thead>
-        <tr>
-          <th>Ngày</th>
-          <th>Khoản mục</th>
-          <th>Giờ</th>
-          <th>% lương</th>
-          <th>Thành tiền</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Giờ hành chính</td><td><input type="number" id="soGioHanhChinh1"></td><td><input type="number" id="phuLuongHanhChinh"></td><td id="tienHanhChinh">0</td></tr>
-        <tr><td>1</td><td>Tăng ca, thông ca</td><td><input type="number" id="soGioTangCa1"></td><td><input type="number" id="phuLuongTangCa"></td><td id="tienTangCa">0</td></tr>
-        <tr><td>1</td><td>Trợ cấp đêm</td><td><input type="number" id="soGioDem1"></td><td><input type="number" id="phuLuongDem"></td><td id="tienTroCapDem">0</td></tr>
-        <tr><td>2</td><td>Giờ hành chính</td><td><input type="number" id="soGioHanhChinh2"></td><td><input type="number" id="phuLuongHanhChinh2"></td><td id="tienHanhChinh2">0</td></tr>
-        <tr><td>2</td><td>Tăng ca, thông ca</td><td><input type="number" id="soGioTangCa2"></td><td><input type="number" id="phuLuongTangCa2"></td><td id="tienTangCa2">0</td></tr>
-        <tr><td>2</td><td>Trợ cấp đêm</td><td><input type="number" id="soGioDem2"></td><td><input type="number" id="phuLuongDem2"></td><td id="tienTroCapDem2">0</td></tr>
-      </tbody>
+      <tr>
+        <th>Khoản mục</th>
+        <th>Thời gian</th>
+        <th>Thành tiền</th>
+      </tr>
+      <tr><td>Ngày công 100%</td><td></td><td>0</td></tr>
+      <tr><td>Tăng ca 150%</td><td></td><td>0</td></tr>
+      <tr><td>Tăng ca 200%</td><td></td><td>0</td></tr>
+      <tr><td>Trợ cấp đêm 30%</td><td></td><td>0</td></tr>
+      <tr><td>Ngày công 200%</td><td></td><td>0</td></tr>
+      <tr><td>Tăng ca 300%</td><td></td><td>0</td></tr>
+      <tr><td>Tăng ca 340%</td><td></td><td>0</td></tr>
+      <tr><td>Trợ cấp đêm 70%</td><td></td><td>0</td></tr>
+      <tr><td>Ngày phép năm</td><td></td><td>0</td></tr>
+      <tr><td>Ngày lễ</td><td></td><td>0</td></tr>
+      <tr><td>Phụ cấp ABC</td><td></td><td></td></tr>
+      <tr><td>Phụ cấp Chuyên cần</td><td></td><td>200000</td></tr>
+      <tr><td>Phụ cấp thâm niên</td><td></td><td>200000, 300000, 400000</td></tr>
+      <tr><td>Phụ cấp chức vụ</td><td></td><td>0, 100000</td></tr>
+      <tr><td>Hỗ trợ đi lại</td><td></td><td></td></tr>
+      <tr><td>Hỗ trợ điện thoại</td><td></td><td>1500000, 2500000, 3000000, 4000000, 5000000</td></tr>
+      <tr><td>Hỗ trợ trẻ em dưới 6 tuổi</td><td></td><td>0, 50000, 100000, 150000, 200000</td></tr>
+      <tr><td>Phụ cấp khác</td><td></td><td></td></tr>
+      <tr><td>Lương ngày lễ, tết, thông ca</td><td></td><td>0</td></tr>
+      <tr><td>Tổng thu nhập</td><td></td><td>0</td></tr>
+      <tr><td>Khấu trừ BHXH 10.5%</td><td></td><td>0</td></tr>
+      <tr><td>Khấu trừ Công đoàn 1%</td><td></td><td>0</td></tr>
+      <tr><td>Thực lĩnh (chưa tính thuế)</td><td></td><td>0</td></tr>
     </table>
-  </section>
+  </div>
 
-  <section class="contact">
-    <h2>Liên hệ:</h2>
+  <div class="section">
+    <h3>LƯƠNG NGÀY LỄ, TẾT, THÔNG CA</h3>
+    <table>
+      <tr>
+        <th>Ngày</th>
+        <th>Khoản mục</th>
+        <th>Giờ</th>
+        <th>% lương</th>
+        <th>Thành tiền</th>
+      </tr>
+      <tr><td></td><td>Giờ hành chính</td><td></td><td></td><td>0</td></tr>
+      <tr><td></td><td>Tăng ca, thông ca</td><td></td><td></td><td>0</td></tr>
+      <tr><td></td><td>Trợ cấp đêm</td><td></td><td></td><td>0</td></tr>
+      <tr><td></td><td>Giờ hành chính</td><td></td><td></td><td>0</td></tr>
+      <tr><td></td><td>Tăng ca, thông ca</td><td></td><td></td><td>0</td></tr>
+      <tr><td></td><td>Trợ cấp đêm</td><td></td><td></td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>LIÊN HỆ</h3>
     <p>Facebook</p>
     <p>Zalo</p>
-  </section>
+  </div>
 
-  <section class="support">
-    <h2>Ủng hộ tôi qua VietinBank</h2>
+  <div class="section">
+    <h3>ỦNG HỘ TÔI QUA VIETINBANK</h3>
     <p>Chủ TK: Trần Đức Trung</p>
-    <p>STK: 102829132222 (Copy)</p>
-  </section>
+    <p>STK: 102829132222 <button>Copy</button></p>
+  </div>
 
-  <section class="download">
-    <h2>⬇ Tải file Excel chấm công ⬇</h2>
+  <div class="section">
+    <h3>TẢI FILE EXCEL CHẤM CÔNG</h3>
     <p>⚠ Vui lòng mở bằng trình duyệt như Safari, Chrome... (Không mở bằng Zalo hoặc Messenger vì có thể lỗi không tải được)</p>
-    <p>Link tải trực tiếp</p>
-    <p>Link dự phòng</p>
-    <p>Link tải về iPhone</p>
-    <p>Link mở trong ứng dụng Excel</p>
-  </section>
+    <p><a href="#">Link tải trực tiếp</a></p>
+    <p><a href="#">Link dự phòng</a></p>
+    <p><a href="#">Link tải về iPhone</a></p>
+    <p><a href="#">Link mở trong ứng dụng Excel</a></p>
+  </div>
 
-  <section class="rules">
-    <h2>📌 Quy tắc tính bảo hiểm, tăng ca, trợ cấp và chuyên cần</h2>
-    <p>Bảo hiểm: = Lương cơ bản + PC thâm niên + PC chức vụ</p>
-    <p>Tăng ca: = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</p>
-    <p>Ngày công chuẩn: Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</p>
-    <p>Chuyên cần: Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</p>
-    <p>PC thâm niên:</p>
+  <div class="section">
+    <h3>QUY TẮC TÍNH BẢO HIỂM, TĂNG CA, TRỢ CẤP VÀ CHUYÊN CẦN</h3>
     <ul>
-      <li>Dưới 1 năm: 200.000 VND</li>
-      <li>Dưới 2 năm: 300.000 VND</li>
-      <li>Trên 2 năm: 400.000 VND</li>
+      <li>Bảo hiểm: = Lương cơ bản + PC thâm niên + PC chức vụ</li>
+      <li>Tăng ca: = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</li>
+      <li>Ngày công chuẩn: Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</li>
+      <li>Chuyên cần: Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</li>
+      <li>PC thâm niên:
+        <ul>
+          <li>Dưới 1 năm: 200.000 VND</li>
+          <li>Dưới 2 năm: 300.000 VND</li>
+          <li>Trên 2 năm: 400.000 VND</li>
+        </ul>
+      </li>
     </ul>
-  </section>
+  </div>
 
-  <section class="overtime-rules">
-    <h2>🕒 Giờ tăng ca & trợ cấp đêm:</h2>
-    <p>150%: Tăng ca ca ngày hoặc sau 18:00</p>
-    <p>200%: Tăng ca đêm (0h~1h, 4h~6h)</p>
-    <p>Trợ cấp đêm 30%: 22h00 ~ 4h00</p>
-    <p>Thông ca 190%: từ 17h00 trở đi (không trợ cấp đêm)</p>
-  </section>
+  <div class="section">
+    <h3>GIỜ TĂNG CA & TRỢ CẤP ĐÊM</h3>
+    <ul>
+      <li>150%: Tăng ca ca ngày hoặc sau 18:00</li>
+      <li>200%: Tăng ca đêm (0h~1h, 4h~6h)</li>
+      <li>Trợ cấp đêm 30%: 22h00 ~ 4h00</li>
+      <li>Thông ca 190%: từ 17h00 trở đi (không trợ cấp đêm)</li>
+    </ul>
+  </div>
 
-  <section class="weekend-rules">
-    <h2>📅 Ca đêm T7 & CN:</h2>
-    <p>Ca đêm T7: Trước 0h00 như ngày thường; Sau 0h00: 200%, trợ cấp đêm 70%, tăng ca 340%</p>
-    <p>Ca đêm CN: Trước 0h00: 200%, trợ cấp đêm 70%; Sau 0h00 như ngày thường</p>
-    <p>Thông ca CN: Sau 17h00: 380%</p>
-  </section>
+  <div class="section">
+    <h3>CA ĐÊM T7 & CN</h3>
+    <ul>
+      <li>Ca đêm T7: Trước 0h00 như ngày thường; Sau 0h00: 200%, trợ cấp đêm 70%, tăng ca 340%</li>
+      <li>Ca đêm CN: Trước 0h00: 200%, trợ cấp đêm 70%; Sau 0h00 như ngày thường</li>
+      <li>Thông ca CN: Sau 17h00: 380%</li>
+    </ul>
+  </div>
 
-  <section class="holiday-rules">
-    <h2>🎉 Ngày lễ, Tết:</h2>
-    <p>Ca ngày lễ: Ca ngày: 300%, tăng ca 450%</p>
-    <p>Ca đêm trước lễ (VD 31/12): Trước 0h00 như thường; Sau 0h00: 300%, trợ cấp đêm 90%, tăng ca 510%</p>
-    <p>Ca đêm ngày lễ (VD 1/1): Trước 0h00: 300%, trợ cấp đêm 90%; Sau 0h00: như ngày thường</p>
-    <p>Ca ngày Tết âm lịch: 500%</p>
-    <p>Ca đêm Tết âm lịch: 590%</p>
-  </section>
+  <div class="section">
+    <h3>NGÀY LỄ, TẾT</h3>
+    <ul>
+      <li>Ca ngày lễ: Ca ngày: 300%, tăng ca 450%</li>
+      <li>Ca đêm trước lễ (VD 31/12): Trước 0h00 như thường; Sau 0h00: 300%, trợ cấp đêm 90%, tăng ca 510%</li>
+      <li>Ca đêm ngày lễ (VD 1/1): Trước 0h00: 300%, trợ cấp đêm 90%; Sau 0h00: như ngày thường</li>
+      <li>Ca ngày Tết âm lịch: 500%</li>
+      <li>Ca đêm Tết âm lịch: 590%</li>
+    </ul>
+  </div>
 
-  <section class="ad-block">
-    <h2>CHẶN QUẢNG CÁO TRÊN ĐIỆN THOẠI</h2>
+  <div class="section">
+    <h3>CHẶN QUẢNG CÁO TRÊN ĐIỆN THOẠI</h3>
     <p>DNS, VPN 1.1.1.1 - Cloudflare tăng tốc Internet</p>
-    <p>Mã hoá dữ liệu an toàn, bảo mật</p>
+    <p>Mã hóa dữ liệu an toàn, bảo mật</p>
     <p>Chặn: mã độc, lừa đảo, theo dõi, cờ bạc, quảng cáo, nội dung độc hại...</p>
-    <p>🔗 Xem hướng dẫn tại đây</p>
-  </section>
-
-  <script src="tinhluong.js"></script>
+    <p><a href="#">Xem hướng dẫn tại đây</a></p>
+  </div>
 </body>
 </html>
