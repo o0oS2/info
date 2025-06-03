@@ -1,456 +1,154 @@
-/**
-
-- Ứng dụng tính lương - Đã được tối ưu hóa
-- Tác giả: Trần Đức Trung
-  */
-
-class SalaryCalculator {
-constructor() {
-this.defaultValues = {
-pcDiLai: 500000,
-pcChuyenCan: 200000,
-pcThamNien: 400000
-};
-
-```
-this.elements = {};
-this.inputs = [];
-
-this.init();
-```
-
-}
-
-/**
-
-- Khởi tạo ứng dụng
-  */
-  init() {
-  this.cacheElements();
-  this.setDefaultValues();
-  this.bindEvents();
-  this.calculate();
-  }
-
-/**
-
-- Cache các element DOM để tránh query lặp lại
-  */
-  cacheElements() {
-  // Cache tất cả input và select elements
-  this.inputs = Array.from(document.querySelectorAll(“input, select”));
-
-```
-// Cache các element thường xuyên được sử dụng
-const elementIds = [
-  'luongCoBan', 'ngayCongChuan', 'pcThamNien', 'pcChucVu', 'pcDiLai',
-  'ngayCong', 'tc150', 'tc200', 'tcDem30', 'ngayCong200', 'tc300', 'tc340',
-  'tcDem70', 'phepNam', 'le', 'pcABC', 'pcChuyenCan', 'pcDienThoai',
-  'pcTreEm', 'pcKhac',
-  'tienNgayCong', 'tienTC150', 'tienTC200', 'tienDem30', 'tienCong200',
-  'tienTC300', 'tienTC340', 'tienDem70', 'tienPhepNam', 'tienLe',
-  'tienNgayLeTet', 'tongLuong', 'tienTruBHXH', 'tienTruCD', 'thucLinh',
-  'soGioHanhChinh1', 'phuLuongHanhChinh', 'tienHanhChinh',
-  'soGioTangCa1', 'phuLuongTangCa', 'tienTangCa',
-  'soGioDem1', 'phuLuongDem', 'tienTroCapDem',
-  'soGioHanhChinh2', 'phuLuongHanhChinh2', 'tienHanhChinh2',
-  'soGioTangCa2', 'phuLuongTangCa2', 'tienTangCa2',
-  'soGioDem2', 'phuLuongDem2', 'tienTroCapDem2'
-];
-
-elementIds.forEach(id => {
-  this.elements[id] = document.getElementById(id);
-});
-```
-
-}
-
-/**
-
-- Thiết lập giá trị mặc định
-  */
-  setDefaultValues() {
-  Object.entries(this.defaultValues).forEach(([key, value]) => {
-  if (this.elements[key]) {
-  this.elements[key].value = value;
-  }
-  });
-  }
-
-/**
-
-- Bind events cho các input
-  */
-  bindEvents() {
-  this.inputs.forEach((input, index) => {
-  // Xử lý phím Enter để chuyển focus
-  input.addEventListener(“keydown”, (e) => {
-  if (e.key === “Enter”) {
-  e.preventDefault();
-  this.focusNextInput(index);
-  }
-  });
-  
-  // Tính toán lại khi có thay đổi (với debounce)
-  input.addEventListener(“input”, this.debounce(() => this.calculate(), 100));
-  });
-  }
-
-/**
-
-- Chuyển focus đến input tiếp theo
-  */
-  focusNextInput(currentIndex) {
-  const nextInput = this.inputs[currentIndex + 1];
-  if (nextInput) {
-  nextInput.focus();
-  }
-  }
-
-/**
-
-- Debounce function để tránh tính toán quá nhiều lần
-  */
-  debounce(func, wait) {
-  let timeout;
-  return function executedFunction(…args) {
-  const later = () => {
-  clearTimeout(timeout);
-  func.apply(this, args);
-  };
-  clearTimeout(timeout);
-  timeout = setTimeout(later, wait);
-  };
-  }
-
-/**
-
-- Lấy giá trị số từ element (với validation)
-  */
-  getValue(elementId, defaultValue = 0) {
-  const element = this.elements[elementId];
-  if (!element) return defaultValue;
-
-```
-const value = parseFloat(element.value) || defaultValue;
-return Math.max(0, value); // Đảm bảo không âm
-```
-
-}
-
-/**
-
-- Cập nhật hiển thị tiền tệ
-  */
-  updateCurrency(elementId, amount) {
-  const element = this.elements[elementId];
-  if (element) {
-  element.textContent = Math.round(amount).toLocaleString(“vi-VN”);
-  }
-  }
-
-/**
-
-- Tính toán một khoản thu nhập cụ thể
-  */
-  calculateItem(inputId, outputId, calculator) {
-  const value = this.getValue(inputId);
-  const amount = calculator(value);
-  this.updateCurrency(outputId, amount);
-  return amount;
-  }
-
-/**
-
-- Tính lương chính
-  */
-  calculate() {
-  try {
-  // Lấy dữ liệu đầu vào
-  const baseSalary = this.getValue(‘luongCoBan’);
-  const standardWorkDays = this.getValue(‘ngayCongChuan’, 26);
-  const seniorityAllowance = this.getValue(‘pcThamNien’);
-  const positionAllowance = this.getValue(‘pcChucVu’);
-  const transportAllowance = this.getValue(‘pcDiLai’);
-  
-  // Tính lương cơ bản theo ngày và giờ
-  const dailyWage = baseSalary / standardWorkDays;
-  const overtimeWage = (baseSalary + seniorityAllowance + positionAllowance + transportAllowance) / standardWorkDays / 8;
-  const nightAllowanceRate = overtimeWage;
-  
-  // Tính từng khoản thu nhập
-  let totalIncome = 0;
-  
-  // Thu nhập từ công việc thường
-  totalIncome += this.calculateItem(‘ngayCong’, ‘tienNgayCong’, days => dailyWage * days);
-  totalIncome += this.calculateItem(‘tc150’, ‘tienTC150’, hours => overtimeWage * 1.5 * hours);
-  totalIncome += this.calculateItem(‘tc200’, ‘tienTC200’, hours => overtimeWage * 2 * hours);
-  totalIncome += this.calculateItem(‘tcDem30’, ‘tienDem30’, hours => nightAllowanceRate * 0.3 * hours);
-  
-  // Thu nhập ngày lễ/chủ nhật
-  totalIncome += this.calculateItem(‘ngayCong200’, ‘tienCong200’, days => dailyWage * 2 * days);
-  totalIncome += this.calculateItem(‘tc300’, ‘tienTC300’, hours => overtimeWage * 3 * hours);
-  totalIncome += this.calculateItem(‘tc340’, ‘tienTC340’, hours => overtimeWage * 3.4 * hours);
-  totalIncome += this.calculateItem(‘tcDem70’, ‘tienDem70’, hours => nightAllowanceRate * 0.7 * hours);
-  
-  // Nghỉ phép và lễ
-  totalIncome += this.calculateItem(‘phepNam’, ‘tienPhepNam’, days => dailyWage * days);
-  totalIncome += this.calculateItem(‘le’, ‘tienLe’, days => dailyWage * days);
-  
-  // Tính thu nhập từ bảng phụ
-  const holidayIncome = this.calculateHolidayTable(dailyWage, overtimeWage, nightAllowanceRate);
-  this.updateCurrency(‘tienNgayLeTet’, holidayIncome);
-  totalIncome += holidayIncome;
-  
-  // Cộng các phụ cấp
-  const allowances = [‘pcABC’, ‘pcChuyenCan’, ‘pcThamNien’, ‘pcChucVu’, ‘pcDiLai’, ‘pcDienThoai’, ‘pcTreEm’, ‘pcKhac’];
-  const totalAllowances = allowances.reduce((sum, id) => sum + this.getValue(id), 0);
-  totalIncome += totalAllowances;
-  
-  // Cập nhật tổng thu nhập
-  this.updateCurrency(‘tongLuong’, totalIncome);
-  
-  // Tính khấu trừ
-  const insuranceBase = baseSalary + seniorityAllowance + positionAllowance;
-  const socialInsurance = Math.round(insuranceBase * 0.105);
-  const unionFee = Math.round(insuranceBase * 0.01);
-  
-  this.updateCurrency(‘tienTruBHXH’, socialInsurance);
-  this.updateCurrency(‘tienTruCD’, unionFee);
-  
-  // Tính thực lĩnh
-  const netSalary = Math.round(totalIncome) - socialInsurance - unionFee;
-  this.updateCurrency(‘thucLinh’, netSalary);
-
-```
-} catch (error) {
-  console.error('Lỗi khi tính lương:', error);
-  this.showError('Có lỗi xảy ra khi tính toán. Vui lòng kiểm tra lại dữ liệu nhập.');
-}
-```
-
-}
-
-/**
-
-- Tính thu nhập từ bảng ngày lễ, tết
-  */
-  calculateHolidayTable(dailyWage, overtimeWage, nightAllowanceRate) {
-  const calculations = [
-  {
-  hoursId: ‘soGioHanhChinh1’,
-  rateId: ‘phuLuongHanhChinh’,
-  outputId: ‘tienHanhChinh’,
-  baseRate: dailyWage / 8
-  },
-  {
-  hoursId: ‘soGioTangCa1’,
-  rateId: ‘phuLuongTangCa’,
-  outputId: ‘tienTangCa’,
-  baseRate: overtimeWage
-  },
-  {
-  hoursId: ‘soGioDem1’,
-  rateId: ‘phuLuongDem’,
-  outputId: ‘tienTroCapDem’,
-  baseRate: nightAllowanceRate
-  },
-  {
-  hoursId: ‘soGioHanhChinh2’,
-  rateId: ‘phuLuongHanhChinh2’,
-  outputId: ‘tienHanhChinh2’,
-  baseRate: dailyWage / 8
-  },
-  {
-  hoursId: ‘soGioTangCa2’,
-  rateId: ‘phuLuongTangCa2’,
-  outputId: ‘tienTangCa2’,
-  baseRate: overtimeWage
-  },
-  {
-  hoursId: ‘soGioDem2’,
-  rateId: ‘phuLuongDem2’,
-  outputId: ‘tienTroCapDem2’,
-  baseRate: nightAllowanceRate
-  }
-  ];
-
-```
-return calculations.reduce((total, calc) => {
-  const hours = this.getValue(calc.hoursId);
-  const rate = this.getValue(calc.rateId);
-  const amount = Math.round(hours * rate * calc.baseRate / 100);
-  
-  this.updateCurrency(calc.outputId, amount);
-  return total + amount;
-}, 0);
-```
-
-}
-
-/**
-
-- Hiển thị thông báo lỗi
-  */
-  showError(message) {
-  // Tạo hoặc cập nhật thông báo lỗi
-  let errorDiv = document.getElementById(‘error-message’);
-  if (!errorDiv) {
-  errorDiv = document.createElement(‘div’);
-  errorDiv.id = ‘error-message’;
-  errorDiv.style.cssText = `position: fixed; top: 20px; right: 20px; background: #dc3545; color: white; padding: 15px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 1000; max-width: 300px;`;
-  document.body.appendChild(errorDiv);
-  }
-
-```
-errorDiv.textContent = message;
-errorDiv.style.display = 'block';
-
-// Tự động ẩn sau 5 giây
-setTimeout(() => {
-  if (errorDiv) {
-    errorDiv.style.display = 'none';
-  }
-}, 5000);
-```
-
-}
-
-/**
-
-- Export dữ liệu (có thể mở rộng cho tính năng in ấn/xuất file)
-  */
-  exportData() {
-  const data = {
-  basicSalary: this.getValue(‘luongCoBan’),
-  standardDays: this.getValue(‘ngayCongChuan’),
-  totalIncome: this.elements.tongLuong?.textContent || ‘0’,
-  netSalary: this.elements.thucLinh?.textContent || ‘0’,
-  exportDate: new Date().toISOString()
+document.addEventListener("DOMContentLoaded", function () {
+  // Constants
+  const DEFAULT_VALUES = {
+    pcDiLai: 500000,
+    pcChuyenCan: 200000,
+    pcThamNien: 400000
   };
 
-```
-return data;
-```
+  // DOM Elements
+  const ELEMENTS = {
+    pcDiLai: document.getElementById("pcDiLai"),
+    pcChuyenCan: document.getElementById("pcChuyenCan"),
+    pcThamNien: document.getElementById("pcThamNien"),
+    luongCoBan: document.getElementById("luongCoBan"),
+    ngayCongChuan: document.getElementById("ngayCongChuan"),
+    tongLuong: document.getElementById("tongLuong"),
+    thucLinh: document.getElementById("thucLinh")
+  };
 
-}
+  // Initialize default values
+  ELEMENTS.pcDiLai.value = DEFAULT_VALUES.pcDiLai;
+  ELEMENTS.pcChuyenCan.value = DEFAULT_VALUES.pcChuyenCan;
+  ELEMENTS.pcThamNien.value = DEFAULT_VALUES.pcThamNien;
 
-/**
-
-- Reset form về trạng thái ban đầu
-  */
-  reset() {
-  this.inputs.forEach(input => {
-  if (input.type === ‘number’ || input.type === ‘text’) {
-  input.value = ‘’;
-  } else if (input.tagName === ‘SELECT’) {
-  input.selectedIndex = 0;
-  }
-  });
-
-```
-this.setDefaultValues();
-this.calculate();
-```
-
-}
-}
-
-// Utility functions
-const utils = {
-/**
-
-- Copy số tài khoản
-  */
-  copySTK() {
-  const stk = document.getElementById(‘stk’)?.textContent;
-  if (stk && navigator.clipboard) {
-  navigator.clipboard.writeText(stk).then(() => {
-  utils.showToast(‘Đã copy số tài khoản!’);
-  }).catch(() => {
-  utils.fallbackCopySTK(stk);
-  });
-  } else if (stk) {
-  utils.fallbackCopySTK(stk);
-  }
-  },
-
-/**
-
-- Fallback copy method cho các trình duyệt cũ
-  */
-  fallbackCopySTK(text) {
-  const textArea = document.createElement(‘textarea’);
-  textArea.value = text;
-  textArea.style.position = ‘fixed’;
-  textArea.style.opacity = ‘0’;
-  document.body.appendChild(textArea);
-  textArea.select();
-
-```
-try {
-  document.execCommand('copy');
-  utils.showToast('Đã copy số tài khoản!');
-} catch (err) {
-  utils.showToast('Không thể copy. Vui lòng copy thủ công: ' + text);
-}
-
-document.body.removeChild(textArea);
-```
-
-},
-
-/**
-
-- Hiển thị toast notification
-  */
-  showToast(message, type = ‘success’) {
-  const toast = document.createElement(‘div’);
-  toast.style.cssText = `position: fixed; bottom: 20px; right: 20px; background: ${type === 'success' ? '#28a745' : '#dc3545'}; color: white; padding: 12px 20px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 1001; transition: all 0.3s ease; opacity: 0; transform: translateY(20px);    `;
-
-```
-toast.textContent = message;
-document.body.appendChild(toast);
-
-// Animation
-requestAnimationFrame(() => {
-  toast.style.opacity = '1';
-  toast.style.transform = 'translateY(0)';
-});
-
-// Auto remove
-setTimeout(() => {
-  toast.style.opacity = '0';
-  toast.style.transform = 'translateY(20px)';
-  setTimeout(() => {
-    if (toast.parentNode) {
-      document.body.removeChild(toast);
+  // Event delegation for inputs
+  document.addEventListener("input", function(e) {
+    if (e.target.matches("input, select")) {
+      tinhLuong();
     }
-  }, 300);
-}, 3000);
-```
+  });
 
-}
-};
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && e.target.matches("input, select")) {
+      e.preventDefault();
+      const inputs = Array.from(document.querySelectorAll("input, select"));
+      const currentIndex = inputs.indexOf(e.target);
+      if (currentIndex < inputs.length - 1) {
+        inputs[currentIndex + 1].focus();
+      }
+    }
+  });
 
-// Khởi tạo ứng dụng khi DOM loaded
-document.addEventListener(“DOMContentLoaded”, () => {
-window.salaryCalculator = new SalaryCalculator();
+  // Main calculation function
+  function tinhLuong() {
+    const luongCoBan = +ELEMENTS.luongCoBan.value || 0;
+    const ngayCongChuan = +ELEMENTS.ngayCongChuan.value || 1;
+    
+    const phuCapValues = getPhuCapValues();
+    const { luongNgayCong, luongTangCa, troCapDem } = calculateBaseRates(luongCoBan, ngayCongChuan, phuCapValues);
+    
+    const tienCong = calculateTienCong(luongNgayCong, luongTangCa, troCapDem);
+    const tienBangPhu = calcBangPhu(luongNgayCong, luongTangCa, troCapDem);
+    const phuCapTong = calculateTotalPhuCap(phuCapValues);
+    
+    const tongThuNhap = tienCong.total + tienBangPhu + phuCapTong;
+    updateTotalDisplay(tongThuNhap, luongCoBan, phuCapValues);
+  }
 
-// Expose utility functions globally
-window.copySTK = utils.copySTK;
-window.showToast = utils.showToast;
+  // Helper functions
+  function getPhuCapValues() {
+    return {
+      pcThamNien: +document.getElementById("pcThamNien").value || 0,
+      pcChucVu: +document.getElementById("pcChucVu").value || 0,
+      pcDiLai: +document.getElementById("pcDiLai").value || 0,
+      pcABC: +document.getElementById("pcABC").value || 0,
+      pcChuyenCan: +document.getElementById("pcChuyenCan").value || 0,
+      pcDienThoai: +document.getElementById("pcDienThoai").value || 0,
+      pcTreEm: +document.getElementById("pcTreEm").value || 0,
+      pcKhac: +document.getElementById("pcKhac").value || 0
+    };
+  }
+
+  function calculateBaseRates(luongCoBan, ngayCongChuan, phuCapValues) {
+    const luongNgayCong = luongCoBan / ngayCongChuan;
+    const luongTangCa = (luongCoBan + phuCapValues.pcThamNien + phuCapValues.pcChucVu + phuCapValues.pcDiLai) / ngayCongChuan / 8;
+    const troCapDem = luongTangCa;
+    
+    return { luongNgayCong, luongTangCa, troCapDem };
+  }
+
+  function calculateTienCong(luongNgayCong, luongTangCa, troCapDem) {
+    const calculations = [
+      { idSo: "ngayCong", idTien: "tienNgayCong", calc: so => luongNgayCong * so },
+      { idSo: "tc150", idTien: "tienTC150", calc: so => luongTangCa * 1.5 * so },
+      { idSo: "tc200", idTien: "tienTC200", calc: so => luongTangCa * 2 * so },
+      { idSo: "tcDem30", idTien: "tienDem30", calc: so => troCapDem * 0.3 * so },
+      { idSo: "ngayCong200", idTien: "tienCong200", calc: so => luongNgayCong * 2 * so },
+      { idSo: "tc300", idTien: "tienTC300", calc: so => luongTangCa * 3 * so },
+      { idSo: "tc340", idTien: "tienTC340", calc: so => luongTangCa * 3.4 * so },
+      { idSo: "tcDem70", idTien: "tienDem70", calc: so => troCapDem * 0.7 * so },
+      { idSo: "phepNam", idTien: "tienPhepNam", calc: so => luongNgayCong * so },
+      { idSo: "le", idTien: "tienLe", calc: so => luongNgayCong * so }
+    ];
+
+    let total = 0;
+    calculations.forEach(({idSo, idTien, calc}) => {
+      const val = +document.getElementById(idSo).value || 0;
+      const tien = Math.round(calc(val));
+      document.getElementById(idTien).textContent = tien.toLocaleString("vi-VN");
+      total += tien;
+    });
+
+    return { total };
+  }
+
+  function calculateTotalPhuCap(phuCapValues) {
+    return Object.values(phuCapValues).reduce((sum, value) => sum + value, 0);
+  }
+
+  function updateTotalDisplay(tongThuNhap, luongCoBan, phuCapValues) {
+    ELEMENTS.tongLuong.textContent = Math.round(tongThuNhap).toLocaleString("vi-VN");
+    
+    const luongDongBH = luongCoBan + phuCapValues.pcThamNien + phuCapValues.pcChucVu;
+    const tienTruBHXH = Math.round(luongDongBH * 0.105);
+    const tienTruCD = Math.round(luongDongBH * 0.01);
+    
+    document.getElementById("tienTruBHXH").textContent = tienTruBHXH.toLocaleString("vi-VN");
+    document.getElementById("tienTruCD").textContent = tienTruCD.toLocaleString("vi-VN");
+    
+    const thucLinh = Math.round(tongThuNhap) - tienTruBHXH - tienTruCD;
+    ELEMENTS.thucLinh.textContent = thucLinh.toLocaleString("vi-VN");
+  }
+
+  function calcBangPhu(luongNgayCong, luongTangCa, troCapDem) {
+    const phuLuongConfigs = [
+      { soGioId: "soGioHanhChinh1", heSoId: "phuLuongHanhChinh", rowTienId: "tienHanhChinh", loaiLuong: "hanhChinh" },
+      { soGioId: "soGioTangCa1", heSoId: "phuLuongTangCa", rowTienId: "tienTangCa", loaiLuong: "tangCa" },
+      { soGioId: "soGioDem1", heSoId: "phuLuongDem", rowTienId: "tienTroCapDem", loaiLuong: "dem" },
+      { soGioId: "soGioHanhChinh2", heSoId: "phuLuongHanhChinh2", rowTienId: "tienHanhChinh2", loaiLuong: "hanhChinh" },
+      { soGioId: "soGioTangCa2", heSoId: "phuLuongTangCa2", rowTienId: "tienTangCa2", loaiLuong: "tangCa" },
+      { soGioId: "soGioDem2", heSoId: "phuLuongDem2", rowTienId: "tienTroCapDem2", loaiLuong: "dem" }
+    ];
+
+    let tongPhu = 0;
+    phuLuongConfigs.forEach(config => {
+      const gio = +document.getElementById(config.soGioId).value || 0;
+      const heSo = +document.getElementById(config.heSoId).value || 0;
+      
+      let donGia = 0;
+      if (config.loaiLuong === "hanhChinh" || config.loaiLuong === "dem") {
+        donGia = luongNgayCong / 800;
+      } else if (config.loaiLuong === "tangCa") {
+        donGia = luongTangCa / 100;
+      }
+      
+      const tien = Math.round(gio * heSo * donGia);
+      document.getElementById(config.rowTienId).textContent = tien.toLocaleString("vi-VN");
+      tongPhu += tien;
+    });
+
+    document.getElementById("tienNgayLeTet").textContent = tongPhu.toLocaleString("vi-VN");
+    return tongPhu;
+  }
 });
-
-// Service Worker registration (nếu cần offline support)
-if (‘serviceWorker’ in navigator) {
-window.addEventListener(‘load’, () => {
-navigator.serviceWorker.register(’/sw.js’)
-.then(registration => {
-console.log(’SW registered: ’, registration);
-})
-.catch(registrationError => {
-console.log(’SW registration failed: ’, registrationError);
-});
-});
-}
