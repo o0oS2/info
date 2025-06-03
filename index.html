@@ -4,14 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Công cụ tính lương chính xác và tiện lợi">
-  <meta name="keywords" content="tính lương, lương tháng, bảng lương, công cụ tính lương">
-  <meta name="author" content="Đức Trung">
   <title>Tính Lương - Đức Trung</title>
-  
-  <!-- Preload resources -->
-  <link rel="preload" href="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Icon.png" as="image">
-  <link rel="preload" href="tinhluong.js" as="script">
-  
   <link rel="icon" href="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Icon.png" type="image/png">
   
   <style>
@@ -37,8 +30,8 @@
       line-height: 1.6;
       color: var(--text-color);
       background: var(--bg-color);
-      padding: 20px;
-      max-width: 1000px;
+      padding: 15px;
+      max-width: 100%;
       margin: 0 auto;
     }
     
@@ -53,14 +46,15 @@
       border-collapse: collapse;
       margin: 10px 0;
       background: #fff;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
     
     th, td {
-      padding: 8px;
+      padding: 6px 8px;
       border: 1px solid var(--border-color);
       text-align: center;
       vertical-align: middle;
+      font-size: 13px;
     }
     
     th {
@@ -79,22 +73,22 @@
     input[type="text"],
     select {
       width: 100%;
-      padding: 6px 8px;
-      font-size: 14px;
+      padding: 4px 6px;
+      font-size: 12px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      height: 32px;
+      border-radius: 3px;
+      height: 26px;
       text-align: right;
     }
     
     button {
-      padding: 8px 16px;
+      padding: 6px 12px;
       background: var(--secondary-color);
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       transition: background 0.2s;
     }
     
@@ -106,10 +100,10 @@
     /* ===== LAYOUT STYLES ===== */
     .container {
       background: white;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     
     .input-group {
@@ -123,14 +117,14 @@
     
     .input-group label {
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--primary-color);
     }
     
     .input-group input,
     .input-group select {
       width: 120px;
-      font-size: 16px;
+      font-size: 14px;
     }
     
     /* ===== SPECIAL STYLES ===== */
@@ -144,7 +138,7 @@
     
     .section-title {
       text-align: center;
-      margin: 15px 0;
+      margin: 12px 0;
       color: var(--primary-color);
     }
     
@@ -167,6 +161,73 @@
       margin-right: 5px;
     }
     
+    /* ===== TỐI ƯU KÍCH THƯỚC BẢNG CHÍNH ===== */
+    #luongContainer {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    
+    #luongContainer table {
+      min-width: 580px;
+    }
+    
+    #luongContainer table > thead > tr > th:nth-child(1),
+    #luongContainer table > tbody > tr > td:nth-child(1) {
+      width: 38%;
+      text-align: left;
+      padding-left: 8px;
+    }
+    
+    #luongContainer table > thead > tr > th:nth-child(2),
+    #luongContainer table > tbody > tr > td:nth-child(2) {
+      width: 22%;
+      padding: 4px;
+    }
+    
+    #luongContainer table > thead > tr > th:nth-child(3),
+    #luongContainer table > tbody > tr > td:nth-child(3) {
+      width: 25%;
+      text-align: right;
+      padding-right: 8px;
+    }
+    
+    /* ===== TỐI ƯU BẢNG PHỤ ===== */
+    #bangPhu {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    
+    #bangPhu table {
+      min-width: 520px;
+    }
+    
+    #bangPhu table td:nth-child(1),
+    #bangPhu table th:nth-child(1) {
+      width: 6%;
+    }
+    
+    #bangPhu table td:nth-child(2),
+    #bangPhu table th:nth-child(2) {
+      width: 44%;
+    }
+    
+    #bangPhu table td:nth-child(3),
+    #bangPhu table th:nth-child(3) {
+      width: 12%;
+      min-width: 45px;
+    }
+    
+    #bangPhu table td:nth-child(4),
+    #bangPhu table th:nth-child(4) {
+      width: 16%;
+      min-width: 45px;
+    }
+    
+    #bangPhu table td:nth-child(5),
+    #bangPhu table th:nth-child(5) {
+      width: 22%;
+    }
+    
     /* ===== RESPONSIVE STYLES ===== */
     @media (max-width: 768px) {
       body {
@@ -185,11 +246,18 @@
       }
       
       table {
-        font-size: 14px;
+        font-size: 12px;
       }
       
       th, td {
-        padding: 6px;
+        padding: 4px 5px;
+      }
+      
+      input[type="number"],
+      input[type="text"],
+      select {
+        font-size: 11px;
+        height: 24px;
       }
     }
     
@@ -197,6 +265,10 @@
       .contact-links {
         flex-direction: column;
         gap: 8px;
+      }
+      
+      .container {
+        padding: 12px;
       }
     }
   </style>
@@ -223,13 +295,12 @@
       <table>
         <thead>
           <tr>
-            <th style="width: 43%; text-align: left; padding-left: 15px;">Khoản mục</th>
-            <th style="width: 23%;">Thời gian</th>
-            <th style="width: 34%; text-align: right; padding-right: 15px;">Thành tiền</th>
+            <th>Khoản mục</th>
+            <th>Thời gian</th>
+            <th>Thành tiền</th>
           </tr>
         </thead>
         <tbody id="luongTable">
-          <!-- Rows remain the same as original -->
           <tr><td>Ngày công 100%</td><td><input type="number" id="ngayCong" placeholder="ngày" /></td><td id="tienNgayCong">0</td></tr>
           <tr><td>Tăng ca 150%</td><td><input type="number" id="tc150" placeholder="giờ" /></td><td id="tienTC150">0</td></tr>
           <tr><td>Tăng ca 200%</td><td><input type="number" id="tc200" placeholder="giờ" /></td><td id="tienTC200">0</td></tr>
@@ -244,40 +315,40 @@
           <tr><td colspan="2">Phụ cấp Chuyên cần</td><td>
             <select id="pcChuyenCan">
               <option value="0">0</option>
-              <option value="200000" selected>200000</option>
+              <option value="200000" selected>200,000</option>
             </select>
           </td></tr>
           <tr><td colspan="2">Phụ cấp thâm niên</td><td>
             <select id="pcThamNien">
-              <option value="200000">200000</option>
-              <option value="300000">300000</option>
-              <option value="400000">400000</option>
+              <option value="200000">200,000</option>
+              <option value="300000">300,000</option>
+              <option value="400000">400,000</option>
             </select>
           </td></tr>
           <tr><td colspan="2">Phụ cấp chức vụ</td><td>
             <select id="pcChucVu">
               <option value="0">0</option>
-              <option value="100000">100000</option>
+              <option value="100000">100,000</option>
             </select>
           </td></tr>
-          <tr><td colspan="2">Hỗ trợ đi lại</td><td><input type="number" id="pcDiLai" /></td></tr>
+          <tr><td colspan="2">Hỗ trợ đi lại</td><td><input type="number" id="pcDiLai" value="500000" /></td></tr>
           <tr><td colspan="2">Hỗ trợ điện thoại</td><td>
             <select id="pcDienThoai">
               <option value="0">0</option>
-              <option value="1500000">1500000</option>
-              <option value="2500000">2500000</option>
-              <option value="3000000">3000000</option>
-              <option value="4000000">4000000</option>
-              <option value="5000000">5000000</option>
+              <option value="1500000">1,500,000</option>
+              <option value="2500000">2,500,000</option>
+              <option value="3000000">3,000,000</option>
+              <option value="4000000">4,000,000</option>
+              <option value="5000000">5,000,000</option>
             </select>
           </td></tr>
           <tr><td colspan="2">Hỗ trợ trẻ em dưới 6 tuổi</td><td>
             <select id="pcTreEm">
               <option value="0">0</option>
-              <option value="50000">50000</option>
-              <option value="100000">100000</option>
-              <option value="150000">150000</option>
-              <option value="200000">200000</option>
+              <option value="50000">50,000</option>
+              <option value="100000">100,000</option>
+              <option value="150000">150,000</option>
+              <option value="200000">200,000</option>
             </select>
           </td></tr>
           <tr><td colspan="2">Phụ cấp khác</td><td><input type="number" id="pcKhac" /></td></tr>
@@ -291,20 +362,19 @@
     </div>
 
     <div id="bangPhu" class="container">
-      <h3 class="section-title" style="color: var(--error-color);">Lương ngày lễ, tết, thông ca</h3>
+      <h3 class="section-title" style="color: var(--error-color);">LƯƠNG NGÀY LỄ, TẾT, THÔNG CA</h3>
       
       <table>
         <thead>
           <tr>
-            <th rowspan="2" style="width: 5%;">Ngày</th>
-            <th rowspan="2" style="width: 58%;">Khoản mục</th>
-            <th rowspan="2" style="width: 10%; min-width: 50px; max-width: 100px;">Giờ</th>
-            <th rowspan="2" style="width: 15%; min-width: 50px; max-width: 100px;">% lương</th>
-            <th rowspan="2" style="width: 22%;">Thành tiền</th>
+            <th rowspan="2">Ngày</th>
+            <th rowspan="2">Khoản mục</th>
+            <th rowspan="2">Giờ</th>
+            <th rowspan="2">% lương</th>
+            <th rowspan="2">Thành tiền</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Rows remain the same as original -->
           <tr>
             <td rowspan="3"><input type="number" /></td>
             <td>Giờ hành chính</td>
@@ -352,11 +422,11 @@
     <div class="contact-links">
       <span>Liên hệ:</span>
       <a href="https://m.facebook.com/tdt93/" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="20" height="20" alt="Facebook">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="18" height="18" alt="Facebook">
         <span style="color: #1877F2; font-weight: bold;">Facebook</span>
       </a>
       <a href="http://zalo.me/trungpl" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" alt="Zalo" width="20" height="20">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" alt="Zalo" width="18" height="18">
         <span style="color: #0068FF; font-weight: bold;">Zalo</span>
       </a>
     </div>
@@ -370,13 +440,13 @@
       </p>
       <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" 
            alt="Vietinbank QR" 
-           style="max-width:100%; height:auto; max-height:320px;"
+           style="max-width:100%; height:auto; max-height:280px;"
            loading="lazy">
     </div>
 
     <div class="container">
-      <h3>⬇ Tải file Excel chấm công ⬇</h3>
-      <p style="color: var(--error-color); font-size: 14px; margin: 10px 0;">
+      <h3>⬇ TẢI FILE EXCEL CHẤM CÔNG ⬇</h3>
+      <p style="color: var(--error-color); font-size: 13px; margin: 10px 0;">
         ⚠ Vui lòng mở bằng trình duyệt như <strong>Safari</strong>, <strong>Chrome</strong>...
         <br>(Không mở bằng <strong>Zalo</strong> hoặc <strong>Messenger</strong> vì có thể lỗi không tải được)
       </p>
@@ -401,56 +471,20 @@
     </div>
 
     <div class="container">
-      <h4>📌 Quy tắc tính bảo hiểm, tăng ca, trợ cấp và chuyên cần</h4>
+      <h4>📌 QUY TẮC TÍNH BẢO HIỂM, TĂNG CA, TRỢ CẤP</h4>
       <ul style="padding-left: 20px; margin-bottom: 15px;">
         <li><b>Bảo hiểm:</b> = Lương cơ bản + PC thâm niên + PC chức vụ</li>
         <li><b>Tăng ca:</b> = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</li>
-        <li><b>Ngày công chuẩn:</b> Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</li>
+        <li><b>Ngày công chuẩn:</b> Số ngày trong tháng - số ngày Chủ nhật (tối đa 26 ngày)</li>
         <li><b>Chuyên cần:</b> Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</li>
-        <li><b>PC thâm niên:</b>
-          <ul style="list-style: disc; padding-left: 20px;">
-            <li>Dưới 1 năm: 200.000 VND</li>
-            <li>Dưới 2 năm: 300.000 VND</li>
-            <li>Trên 2 năm: 400.000 VND</li>
-          </ul>
-        </li>
       </ul>
 
-      <h4>🕒 Giờ tăng ca & trợ cấp đêm:</h4>
-      <ul style="padding-left: 20px; margin-bottom: 15px;">
+      <h4>🕒 GIỜ TĂNG CA & TRỢ CẤP ĐÊM:</h4>
+      <ul style="padding-left: 20px;">
         <li><b>150%:</b> Tăng ca ca ngày hoặc sau 18:00</li>
         <li><b>200%:</b> Tăng ca đêm (0h~1h, 4h~6h)</li>
         <li><b>Trợ cấp đêm 30%:</b> 22h00 ~ 4h00</li>
-        <li><b>Thông ca 190%:</b> từ 17h00 trở đi (không trợ cấp đêm)</li>
       </ul>
-
-      <h4>📅 Ca đêm T7 & CN:</h4>
-      <ul style="padding-left: 20px; margin-bottom: 15px;">
-        <li><b>Ca đêm T7:</b> Trước 0h00 như ngày thường; Sau 0h00: 200%, trợ cấp đêm 70%, tăng ca 340%</li>
-        <li><b>Ca đêm CN:</b> Trước 0h00: 200%, trợ cấp đêm 70%; Sau 0h00 như ngày thường</li>
-        <li><b>Thông ca CN:</b> Sau 17h00: 380%</li>
-      </ul>
-
-      <h4>🎉 Ngày lễ, Tết:</h4>
-      <ul style="padding-left: 20px;">
-        <li><b>Ca ngày lễ:</b> Ca ngày: 300%, tăng ca 450%</li>
-        <li><b>Ca đêm trước lễ (VD 31/12):</b> Trước 0h00 như thường; Sau 0h00: 300%, trợ cấp đêm 90%, tăng ca 510%</li>
-        <li><b>Ca đêm ngày lễ (VD 1/1):</b> Trước 0h00: 300%, trợ cấp đêm 90%; Sau 0h00: như ngày thường</li>
-        <li><b>Ca ngày Tết âm lịch:</b> 500%</li>
-        <li><b>Ca đêm Tết âm lịch:</b> 590%</li>
-      </ul>
-    </div>
-
-    <div class="container">
-      <h3>CHẶN QUẢNG CÁO TRÊN ĐIỆN THOẠI</h3>
-      <ul style="padding-left: 20px; margin-bottom: 10px;">
-        <li>DNS, VPN 1.1.1.1 - Cloudflare tăng tốc Internet</li>
-        <li>Mã hoá dữ liệu an toàn, bảo mật</li>
-        <li>Chặn: mã độc, lừa đảo, theo dõi, cờ bạc, quảng cáo, nội dung độc hại...</li>
-      </ul>
-      <p>
-        🔗 <a href="https://o0os2.github.io/DNS-Filter/" target="_blank" rel="noopener" style="color: var(--primary-color);">Xem hướng dẫn tại đây</a>
-      </p>
     </div>
   </footer>
 
