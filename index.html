@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -24,707 +25,719 @@
       --spacing-lg: 24px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+```
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      margin: 0;
-      padding: var(--spacing-md);
-    }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.4;
+  margin: 0;
+  padding: var(--spacing-md);
+}
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-    h1 {
-      text-align: center;
-      color: var(--primary-color);
-      margin-bottom: var(--spacing-md);
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: 600;
-    }
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-weight: 600;
+}
 
-    h3 {
-      color: var(--danger-color);
-      text-align: center;
-      margin: var(--spacing-md) 0;
-      font-size: 1.1rem;
-    }
+h3 {
+  color: var(--danger-color);
+  text-align: center;
+  margin: var(--spacing-md) 0;
+  font-size: 1rem;
+}
 
-    .card {
-      background: var(--white);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      margin-bottom: var(--spacing-md);
-      overflow: hidden;
-    }
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+}
 
-    .input-section {
-      padding: var(--spacing-md);
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: var(--white);
-    }
+.input-section {
+  padding: var(--spacing-sm);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--white);
+}
 
-    .input-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: var(--spacing-md);
-    }
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
 
-    .input-group {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-    }
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
 
-    .input-group label {
-      font-weight: 500;
-      white-space: nowrap;
-      color: var(--white);
-    }
+.input-group label {
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--white);
+  font-size: 14px;
+}
 
-    .input-group input,
-    .input-group select {
-      padding: 8px 12px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 6px;
-      background: rgba(255,255,255,0.1);
-      color: var(--white);
-      font-size: 16px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+.input-group input,
+.input-group select {
+  padding: 4px 8px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  height: 28px;
+}
 
-    .input-group input:focus,
-    .input-group select:focus {
-      outline: none;
-      border-color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.2);
-    }
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.2);
+}
 
-    .input-group input::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
+.input-group input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
 
-    th {
-      background: linear-gradient(135deg, var(--primary-color), #0056b3);
-      color: var(--white);
-      font-weight: 600;
-      text-align: center;
-      padding: 12px 8px;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
+th {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  color: var(--white);
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 4px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 12px;
+}
 
-    td {
-      padding: 8px;
-      border-bottom: 1px solid var(--border-color);
-      vertical-align: middle;
-    }
+td {
+  padding: 3px 4px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  height: 30px;
+}
 
-    .main-table td:first-child {
-      font-weight: 500;
-      padding-left: var(--spacing-md);
-    }
+.main-table td:first-child {
+  font-weight: 500;
+  padding-left: 8px;
+  font-size: 12px;
+}
 
-    .main-table td:last-child {
-      text-align: right;
-      font-weight: 600;
-      padding-right: var(--spacing-md);
-    }
+.main-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  padding-right: 8px;
+  font-size: 12px;
+}
 
-    .table-input {
-      width: 100%;
-      padding: 6px 8px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      text-align: right;
-      font-size: 13px;
-      transition: border-color 0.3s ease;
-    }
+.table-input {
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  text-align: right;
+  font-size: 12px;
+  transition: border-color 0.3s ease;
+  height: 24px;
+}
 
-    .table-input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
-    }
+.table-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px rgba(0,123,255,0.25);
+}
 
-    .highlight-row {
-      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-      font-weight: 600;
-    }
+.highlight-row {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  font-weight: 600;
+}
 
-    .total-row {
-      background: linear-gradient(135deg, #d1ecf1, #74b9ff);
-      font-weight: 700;
-      color: var(--primary-color);
-    }
+.total-row {
+  background: linear-gradient(135deg, #d1ecf1, #74b9ff);
+  font-weight: 700;
+  color: var(--primary-color);
+}
 
-    .deduction-row {
-      background: linear-gradient(135deg, #f8d7da, #fd79a8);
-      color: var(--danger-color);
-    }
+.deduction-row {
+  background: linear-gradient(135deg, #f8d7da, #fd79a8);
+  color: var(--danger-color);
+}
 
-    .holiday-row {
-      color: var(--danger-color);
-      font-weight: 500;
-    }
+.holiday-row {
+  color: var(--danger-color);
+  font-weight: 500;
+}
 
-    .secondary-table {
-      margin-top: var(--spacing-md);
-    }
+.secondary-table {
+  margin-top: var(--spacing-md);
+}
 
-    .secondary-table th {
-      background: linear-gradient(135deg, var(--success-color), #1e7e34);
-    }
+.secondary-table th {
+  background: linear-gradient(135deg, var(--success-color), #1e7e34);
+}
 
-    .info-section {
-      padding: var(--spacing-md);
-      background: var(--light-color);
-      border-left: 4px solid var(--info-color);
-      margin: var(--spacing-md) 0;
-    }
+.info-section {
+  padding: var(--spacing-md);
+  background: var(--light-color);
+  border-left: 4px solid var(--info-color);
+  margin: var(--spacing-md) 0;
+}
 
-    .info-section h4 {
-      color: var(--info-color);
-      margin-top: 0;
-      margin-bottom: var(--spacing-sm);
-    }
+.info-section h4 {
+  color: var(--info-color);
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+}
 
-    .info-section ul {
-      margin: var(--spacing-sm) 0;
-      padding-left: 20px;
-    }
+.info-section ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: 20px;
+}
 
-    .info-section li {
-      margin-bottom: 4px;
-    }
+.info-section li {
+  margin-bottom: 4px;
+}
 
-    .contact-section {
-      background: linear-gradient(135deg, #6c5ce7, #74b9ff);
-      color: var(--white);
-      padding: var(--spacing-md);
-      text-align: center;
-      border-radius: var(--border-radius);
-    }
+.contact-section {
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  color: var(--white);
+  padding: var(--spacing-md);
+  text-align: center;
+  border-radius: var(--border-radius);
+}
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: var(--spacing-md);
-      margin: var(--spacing-sm) 0;
-      flex-wrap: wrap;
-    }
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  flex-wrap: wrap;
+}
 
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--white);
-      text-decoration: none;
-      padding: 8px 16px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 25px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--white);
+  text-decoration: none;
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+}
 
-    .contact-link:hover {
-      background: rgba(255,255,255,0.3);
-      transform: translateY(-2px);
-    }
+.contact-link:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
 
-    .bank-info {
-      background: rgba(255,255,255,0.1);
-      padding: var(--spacing-md);
-      border-radius: var(--border-radius);
-      margin: var(--spacing-md) 0;
-      backdrop-filter: blur(10px);
-    }
+.bank-info {
+  background: rgba(255,255,255,0.1);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin: var(--spacing-md) 0;
+  backdrop-filter: blur(10px);
+}
 
-    .copy-btn {
-      background: var(--success-color);
-      color: var(--white);
-      border: none;
-      padding: 4px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-      margin-left: var(--spacing-sm);
-      transition: background-color 0.3s ease;
-    }
+.copy-btn {
+  background: var(--success-color);
+  color: var(--white);
+  border: none;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  margin-left: var(--spacing-sm);
+  transition: background-color 0.3s ease;
+}
 
-    .copy-btn:hover {
-      background: #218838;
-    }
+.copy-btn:hover {
+  background: #218838;
+}
 
-    .download-section {
-      background: var(--white);
-      border: 2px dashed var(--border-color);
-      border-radius: var(--border-radius);
-      padding: var(--spacing-md);
-      margin: var(--spacing-md) 0;
-    }
+.download-section {
+  background: var(--white);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
 
-    .download-list {
-      list-style: none;
-      padding: 0;
-      margin: var(--spacing-sm) 0;
-    }
+.download-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-sm) 0;
+}
 
-    .download-item {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
+.download-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
 
-    .download-item:last-child {
-      border-bottom: none;
-    }
+.download-item:last-child {
+  border-bottom: none;
+}
 
-    .download-link {
-      color: var(--primary-color);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
+.download-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-    .download-link:hover {
-      color: #0056b3;
-      text-decoration: underline;
-    }
+.download-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
 
-    .warning-text {
-      color: var(--danger-color);
-      font-size: 13px;
-      margin-bottom: var(--spacing-sm);
-    }
+.warning-text {
+  color: var(--danger-color);
+  font-size: 13px;
+  margin-bottom: var(--spacing-sm);
+}
 
-    .qr-code {
-      max-width: 280px;
-      height: auto;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      margin: var(--spacing-md) 0;
-    }
+.qr-code {
+  max-width: 280px;
+  height: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin: var(--spacing-md) 0;
+}
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      body {
-        padding: var(--spacing-sm);
-      }
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-sm);
+  }
 
-      .input-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-      .input-group {
-        justify-content: space-between;
-      }
+  .input-group {
+    justify-content: space-between;
+  }
 
-      .input-group input,
-      .input-group select {
-        flex: 1;
-        min-width: 0;
-      }
+  .input-group input,
+  .input-group select {
+    flex: 1;
+    min-width: 0;
+  }
 
-      table {
-        font-size: 13px;
-      }
+  table {
+    font-size: 11px;
+  }
 
-      th, td {
-        padding: 6px 4px;
-      }
+  th, td {
+    padding: 2px 2px;
+  }
 
-      .main-table td:first-child,
-      .main-table td:last-child {
-        padding-left: 8px;
-        padding-right: 8px;
-      }
+  .main-table td:first-child,
+  .main-table td:last-child {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
 
-      .contact-links {
-        flex-direction: column;
-        align-items: center;
-      }
+  .contact-links {
+    justify-content: center;
+  }
 
-      .qr-code {
-        max-width: 240px;
-      }
-    }
+  .qr-code {
+    max-width: 240px;
+  }
+}
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 0;
-      }
+@media (max-width: 480px) {
+  .container {
+    padding: 0;
+  }
 
-      .card {
-        margin-bottom: var(--spacing-sm);
-        border-radius: 0;
-      }
+  .card {
+    margin-bottom: var(--spacing-sm);
+    border-radius: 0;
+  }
 
-      table {
-        font-size: 12px;
-      }
+  table {
+    font-size: 10px;
+  }
 
-      .input-section {
-        padding: var(--spacing-sm);
-      }
-    }
+  .input-section {
+    padding: var(--spacing-sm);
+  }
+}
 
-    /* Animation */
-    .card {
-      animation: slideIn 0.5s ease-out;
-    }
+/* Animation */
+.card {
+  animation: slideIn 0.5s ease-out;
+}
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    /* Loading state */
-    .loading {
-      position: relative;
-      overflow: hidden;
-    }
+/* Loading state */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
 
-    .loading::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      animation: loading 1.5s infinite;
-    }
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: loading 1.5s infinite;
+}
 
-    @keyframes loading {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+```
+
   </style>
 </head>
 <body>
   <div class="container">
     <h1>BẢNG TÍNH LƯƠNG</h1>
 
-    <div class="card">
-      <div class="input-section">
-        <div class="input-row">
-          <div class="input-group">
-            <label for="luongCoBan">Lương cơ bản:</label>
-            <input type="number" id="luongCoBan" placeholder="Nhập lương cơ bản">
-          </div>
-          <div class="input-group">
-            <label for="ngayCongChuan">Ngày công chuẩn:</label>
-            <select id="ngayCongChuan">
-              <option value="24">24</option>
-              <option value="25">25</option>
-              <option value="26" selected>26</option>
-            </select>
-          </div>
-        </div>
+```
+<div class="card">
+  <div class="input-section">
+    <div class="input-row">
+      <div class="input-group">
+        <label for="luongCoBan">Lương cơ bản:</label>
+        <input type="number" id="luongCoBan" placeholder="Nhập lương cơ bản">
       </div>
-
-      <table class="main-table">
-        <thead>
-          <tr>
-            <th style="width: 45%;">Khoản mục</th>
-            <th style="width: 25%;">Thời gian</th>
-            <th style="width: 30%;">Thành tiền</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ngày công 100%</td>
-            <td><input type="number" id="ngayCong" class="table-input" placeholder="ngày"></td>
-            <td id="tienNgayCong">0</td>
-          </tr>
-          <tr>
-            <td>Tăng ca 150%</td>
-            <td><input type="number" id="tc150" class="table-input" placeholder="giờ"></td>
-            <td id="tienTC150">0</td>
-          </tr>
-          <tr>
-            <td>Tăng ca 200%</td>
-            <td><input type="number" id="tc200" class="table-input" placeholder="giờ"></td>
-            <td id="tienTC200">0</td>
-          </tr>
-          <tr>
-            <td>Trợ cấp đêm 30%</td>
-            <td><input type="number" id="tcDem30" class="table-input" placeholder="giờ"></td>
-            <td id="tienDem30">0</td>
-          </tr>
-          <tr class="holiday-row">
-            <td>Ngày công 200%</td>
-            <td><input type="number" id="ngayCong200" class="table-input" placeholder="ngày"></td>
-            <td id="tienCong200">0</td>
-          </tr>
-          <tr class="holiday-row">
-            <td>Tăng ca 300%</td>
-            <td><input type="number" id="tc300" class="table-input" placeholder="giờ"></td>
-            <td id="tienTC300">0</td>
-          </tr>
-          <tr class="holiday-row">
-            <td>Tăng ca 340%</td>
-            <td><input type="number" id="tc340" class="table-input" placeholder="giờ"></td>
-            <td id="tienTC340">0</td>
-          </tr>
-          <tr class="holiday-row">
-            <td>Trợ cấp đêm 70%</td>
-            <td><input type="number" id="tcDem70" class="table-input" placeholder="giờ"></td>
-            <td id="tienDem70">0</td>
-          </tr>
-          <tr>
-            <td>Ngày phép năm</td>
-            <td><input type="number" id="phepNam" class="table-input" placeholder="ngày"></td>
-            <td id="tienPhepNam">0</td>
-          </tr>
-          <tr>
-            <td>Ngày lễ</td>
-            <td><input type="number" id="le" class="table-input" placeholder="ngày"></td>
-            <td id="tienLe">0</td>
-          </tr>
-          <tr>
-            <td colspan="2">Phụ cấp ABC</td>
-            <td><input type="number" id="pcABC" class="table-input"></td>
-          </tr>
-          <tr>
-            <td colspan="2">Phụ cấp Chuyên cần</td>
-            <td>
-              <select id="pcChuyenCan" class="table-input">
-                <option value="0">0</option>
-                <option value="200000" selected>200,000</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Phụ cấp thâm niên</td>
-            <td>
-              <select id="pcThamNien" class="table-input">
-                <option value="200000">200,000</option>
-                <option value="300000">300,000</option>
-                <option value="400000">400,000</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Phụ cấp chức vụ</td>
-            <td>
-              <select id="pcChucVu" class="table-input">
-                <option value="0">0</option>
-                <option value="100000">100,000</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Hỗ trợ đi lại</td>
-            <td><input type="number" id="pcDiLai" class="table-input"></td>
-          </tr>
-          <tr>
-            <td colspan="2">Hỗ trợ điện thoại</td>
-            <td>
-              <select id="pcDienThoai" class="table-input">
-                <option value="0">0</option>
-                <option value="1500000">1,500,000</option>
-                <option value="2500000">2,500,000</option>
-                <option value="3000000">3,000,000</option>
-                <option value="4000000">4,000,000</option>
-                <option value="5000000">5,000,000</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Hỗ trợ trẻ em dưới 6 tuổi</td>
-            <td>
-              <select id="pcTreEm" class="table-input">
-                <option value="0">0</option>
-                <option value="50000">50,000</option>
-                <option value="100000">100,000</option>
-                <option value="150000">150,000</option>
-                <option value="200000">200,000</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Phụ cấp khác</td>
-            <td><input type="number" id="pcKhac" class="table-input"></td>
-          </tr>
-          <tr>
-            <td colspan="2">Lương ngày lễ, tết, thông ca</td>
-            <td id="tienNgayLeTet">0</td>
-          </tr>
-          <tr class="highlight-row">
-            <td colspan="2">Tổng thu nhập</td>
-            <td id="tongLuong">0</td>
-          </tr>
-          <tr class="deduction-row">
-            <td colspan="2">Khấu trừ BHXH 10.5%</td>
-            <td id="tienTruBHXH">0</td>
-          </tr>
-          <tr class="deduction-row">
-            <td colspan="2">Khấu trừ Công đoàn 1%</td>
-            <td id="tienTruCD">0</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2">Thực lĩnh (chưa tính thuế)</td>
-            <td id="thucLinh">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card secondary-table">
-      <h3>Lương ngày lễ, tết, thông ca</h3>
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="2" style="width: 8%;">Ngày</th>
-            <th rowspan="2" style="width: 50%;">Khoản mục</th>
-            <th rowspan="2" style="width: 12%;">Giờ</th>
-            <th rowspan="2" style="width: 15%;">% lương</th>
-            <th rowspan="2" style="width: 15%;">Thành tiền</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td rowspan="3"><input type="number" class="table-input"></td>
-            <td>Giờ hành chính</td>
-            <td><input type="number" id="soGioHanhChinh1" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongHanhChinh" class="table-input"></td>
-            <td id="tienHanhChinh">0</td>
-          </tr>
-          <tr>
-            <td>Tăng ca, thông ca</td>
-            <td><input type="number" id="soGioTangCa1" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongTangCa" class="table-input"></td>
-            <td id="tienTangCa">0</td>
-          </tr>
-          <tr>
-            <td>Trợ cấp đêm</td>
-            <td><input type="number" id="soGioDem1" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongDem" class="table-input"></td>
-            <td id="tienTroCapDem">0</td>
-          </tr>
-          <tr>
-            <td rowspan="3"><input type="number" class="table-input"></td>
-            <td>Giờ hành chính</td>
-            <td><input type="number" id="soGioHanhChinh2" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongHanhChinh2" class="table-input"></td>
-            <td id="tienHanhChinh2">0</td>
-          </tr>
-          <tr>
-            <td>Tăng ca, thông ca</td>
-            <td><input type="number" id="soGioTangCa2" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongTangCa2" class="table-input"></td>
-            <td id="tienTangCa2">0</td>
-          </tr>
-          <tr>
-            <td>Trợ cấp đêm</td>
-            <td><input type="number" id="soGioDem2" class="table-input" placeholder="giờ"></td>
-            <td><input type="number" id="phuLuongDem2" class="table-input"></td>
-            <td id="tienTroCapDem2">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="contact-section">
-      <h3 style="color: white; margin-top: 0;">Liên hệ</h3>
-      <div class="contact-links">
-        <a href="https://m.facebook.com/tdt93/" target="_blank" class="contact-link">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="20" height="20" alt="Facebook">
-          Facebook
-        </a>
-        <a href="http://zalo.me/trungpl" target="_blank" class="contact-link">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" width="20" height="20" alt="Zalo">
-          Zalo
-        </a>
-      </div>
-
-      <div class="bank-info">
-        <h4 style="margin-top: 0; color: white;">Ủng hộ qua VietinBank</h4>
-        <p><strong>Chủ TK:</strong> Trần Đức Trung</p>
-        <p>
-          <strong>STK:</strong> 
-          <span id="stk">102829132222</span>
-          <button class="copy-btn" onclick="copySTK()">Copy</button>
-        </p>
-        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="VietinBank QR" class="qr-code">
+      <div class="input-group">
+        <label for="ngayCongChuan">Ngày công chuẩn:</label>
+        <select id="ngayCongChuan">
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26" selected>26</option>
+        </select>
       </div>
     </div>
+  </div>
 
-    <div class="download-section">
-      <h3 style="margin-top: 0; color: var(--text-color);">⬇ Tải file Excel chấm công ⬇</h3>
-      <p class="warning-text">
-        ⚠ Vui lòng mở bằng trình duyệt như Safari, Chrome...<br>
-        (Không mở bằng Zalo hoặc Messenger vì có thể lỗi không tải được)
-      </p>
-      <ul class="download-list">
-        <li class="download-item">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Github.png" alt="GitHub" width="16">
-          <a href="https://github.com/o0oS2/Tinh-luong/raw/refs/heads/main/Ti%CC%81nh%20lu%CC%9Bo%CC%9Bng.xlsx" target="_blank" class="download-link">Link tải trực tiếp</a>
-        </li>
-        <li class="download-item">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Dropbox.png" alt="Dropbox" width="16">
-          <a href="https://www.dropbox.com/s/mplgbw5oao6ljvjmnmw2h/T-nh-l-ng.xlsx?dl=1" target="_blank" class="download-link">Link dự phòng</a>
-        </li>
-        <li class="download-item">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Apple.png" alt="Apple" width="16">
-          <a href="https://www.icloud.com/iclouddrive/0b3bNlgrOqzB2b32wjh1x9pjw" target="_blank" class="download-link">Link tải về iPhone</a>
-        </li>
-        <li class="download-item">
-          <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Excel.png" alt="Excel" width="16">
-          <a href="https://1drv.ms/x/c/6c3a670f4fe04eaf/EfyaGkUWCKBMuew6Q1rmHAsBkstY3ZKjImtMHBeKtW-VGQ?e=WvphtX" target="_blank" class="download-link">Link mở trong ứng dụng Excel</a>
-        </li>
-      </ul>
-    </div>
+  <table class="main-table">
+    <thead>
+      <tr>
+        <th style="width: 45%;">Khoản mục</th>
+        <th style="width: 25%;">Thời gian</th>
+        <th style="width: 30%;">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ngày công 100%</td>
+        <td><input type="number" id="ngayCong" class="table-input" placeholder="ngày"></td>
+        <td id="tienNgayCong">0</td>
+      </tr>
+      <tr>
+        <td>Tăng ca 150%</td>
+        <td><input type="number" id="tc150" class="table-input" placeholder="giờ"></td>
+        <td id="tienTC150">0</td>
+      </tr>
+      <tr>
+        <td>Tăng ca 200%</td>
+        <td><input type="number" id="tc200" class="table-input" placeholder="giờ"></td>
+        <td id="tienTC200">0</td>
+      </tr>
+      <tr>
+        <td>Trợ cấp đêm 30%</td>
+        <td><input type="number" id="tcDem30" class="table-input" placeholder="giờ"></td>
+        <td id="tienDem30">0</td>
+      </tr>
+      <tr class="holiday-row">
+        <td>Ngày công 200%</td>
+        <td><input type="number" id="ngayCong200" class="table-input" placeholder="ngày"></td>
+        <td id="tienCong200">0</td>
+      </tr>
+      <tr class="holiday-row">
+        <td>Tăng ca 300%</td>
+        <td><input type="number" id="tc300" class="table-input" placeholder="giờ"></td>
+        <td id="tienTC300">0</td>
+      </tr>
+      <tr class="holiday-row">
+        <td>Tăng ca 340%</td>
+        <td><input type="number" id="tc340" class="table-input" placeholder="giờ"></td>
+        <td id="tienTC340">0</td>
+      </tr>
+      <tr class="holiday-row">
+        <td>Trợ cấp đêm 70%</td>
+        <td><input type="number" id="tcDem70" class="table-input" placeholder="giờ"></td>
+        <td id="tienDem70">0</td>
+      </tr>
+      <tr>
+        <td>Ngày phép năm</td>
+        <td><input type="number" id="phepNam" class="table-input" placeholder="ngày"></td>
+        <td id="tienPhepNam">0</td>
+      </tr>
+      <tr>
+        <td>Ngày lễ</td>
+        <td><input type="number" id="le" class="table-input" placeholder="ngày"></td>
+        <td id="tienLe">0</td>
+      </tr>
+      <tr>
+        <td colspan="2">Phụ cấp ABC</td>
+        <td><input type="number" id="pcABC" class="table-input"></td>
+      </tr>
+      <tr>
+        <td colspan="2">Phụ cấp Chuyên cần</td>
+        <td>
+          <select id="pcChuyenCan" class="table-input">
+            <option value="0">0</option>
+            <option value="200000" selected>200000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Phụ cấp thâm niên</td>
+        <td>
+          <select id="pcThamNien" class="table-input">
+            <option value="200000">200000</option>
+            <option value="300000">300000</option>
+            <option value="400000">400000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Phụ cấp chức vụ</td>
+        <td>
+          <select id="pcChucVu" class="table-input">
+            <option value="0">0</option>
+            <option value="100000">100000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Hỗ trợ đi lại</td>
+        <td><input type="number" id="pcDiLai" class="table-input"></td>
+      </tr>
+      <tr>
+        <td colspan="2">Hỗ trợ điện thoại</td>
+        <td>
+          <select id="pcDienThoai" class="table-input">
+            <option value="0">0</option>
+            <option value="1500000">1500000</option>
+            <option value="2500000">2500000</option>
+            <option value="3000000">3000000</option>
+            <option value="4000000">4000000</option>
+            <option value="5000000">5000000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Hỗ trợ trẻ em dưới 6 tuổi</td>
+        <td>
+          <select id="pcTreEm" class="table-input">
+            <option value="0">0</option>
+            <option value="50000">50000</option>
+            <option value="100000">100000</option>
+            <option value="150000">150000</option>
+            <option value="200000">200000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Phụ cấp khác</td>
+        <td><input type="number" id="pcKhac" class="table-input"></td>
+      </tr>
+      <tr>
+        <td colspan="2">Lương ngày lễ, tết, thông ca</td>
+        <td id="tienNgayLeTet">0</td>
+      </tr>
+      <tr class="highlight-row">
+        <td colspan="2">Tổng thu nhập</td>
+        <td id="tongLuong">0</td>
+      </tr>
+      <tr class="deduction-row">
+        <td colspan="2">Khấu trừ BHXH 10.5%</td>
+        <td id="tienTruBHXH">0</td>
+      </tr>
+      <tr class="deduction-row">
+        <td colspan="2">Khấu trừ Công đoàn 1%</td>
+        <td id="tienTruCD">0</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="2">Thực lĩnh (chưa tính thuế)</td>
+        <td id="thucLinh">0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    <div class="info-section">
-      <h4>📌 Quy tắc tính bảo hiểm, tăng ca, trợ cấp và chuyên cần</h4>
+<div class="card secondary-table">
+  <h3>Lương ngày lễ, tết, thông ca</h3>
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2" style="width: 8%;">Ngày</th>
+        <th rowspan="2" style="width: 50%;">Khoản mục</th>
+        <th rowspan="2" style="width: 12%;">Giờ</th>
+        <th rowspan="2" style="width: 15%;">% lương</th>
+        <th rowspan="2" style="width: 15%;">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="3"><input type="number" class="table-input"></td>
+        <td>Giờ hành chính</td>
+        <td><input type="number" id="soGioHanhChinh1" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongHanhChinh" class="table-input"></td>
+        <td id="tienHanhChinh">0</td>
+      </tr>
+      <tr>
+        <td>Tăng ca, thông ca</td>
+        <td><input type="number" id="soGioTangCa1" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongTangCa" class="table-input"></td>
+        <td id="tienTangCa">0</td>
+      </tr>
+      <tr>
+        <td>Trợ cấp đêm</td>
+        <td><input type="number" id="soGioDem1" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongDem" class="table-input"></td>
+        <td id="tienTroCapDem">0</td>
+      </tr>
+      <tr>
+        <td rowspan="3"><input type="number" class="table-input"></td>
+        <td>Giờ hành chính</td>
+        <td><input type="number" id="soGioHanhChinh2" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongHanhChinh2" class="table-input"></td>
+        <td id="tienHanhChinh2">0</td>
+      </tr>
+      <tr>
+        <td>Tăng ca, thông ca</td>
+        <td><input type="number" id="soGioTangCa2" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongTangCa2" class="table-input"></td>
+        <td id="tienTangCa2">0</td>
+      </tr>
+      <tr>
+        <td>Trợ cấp đêm</td>
+        <td><input type="number" id="soGioDem2" class="table-input" placeholder="giờ"></td>
+        <td><input type="number" id="phuLuongDem2" class="table-input"></td>
+        <td id="tienTroCapDem2">0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="contact-section">
+  <h3 style="color: white; margin-top: 0; margin-bottom: 8px;">Liên hệ</h3>
+  <div class="contact-links">
+    <a href="https://m.facebook.com/tdt93/" target="_blank" class="contact-link">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="16" height="16" alt="Facebook">
+      Facebook
+    </a>
+    <a href="http://zalo.me/trungpl" target="_blank" class="contact-link">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" width="16" height="16" alt="Zalo">
+      Zalo
+    </a>
+  </div>
+
+  <div class="bank-info">
+    <h4 style="margin-top: 0; color: white;">Ủng hộ qua VietinBank</h4>
+    <p><strong>Chủ TK:</strong> Trần Đức Trung</p>
+    <p>
+      <strong>STK:</strong> 
+      <span id="stk">102829132222</span>
+      <button class="copy-btn" onclick="copySTK()">Copy</button>
+    </p>
+    <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="VietinBank QR" class="qr-code">
+  </div>
+</div>
+
+<div class="download-section">
+  <h3 style="margin-top: 0; color: var(--text-color);">⬇ Tải file Excel chấm công ⬇</h3>
+  <p class="warning-text">
+    ⚠ Vui lòng mở bằng trình duyệt như Safari, Chrome...<br>
+    (Không mở bằng Zalo hoặc Messenger vì có thể lỗi không tải được)
+  </p>
+  <ul class="download-list">
+    <li class="download-item">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Github.png" alt="GitHub" width="16">
+      <a href="https://github.com/o0oS2/Tinh-luong/raw/refs/heads/main/Ti%CC%81nh%20lu%CC%9Bo%CC%9Bng.xlsx" target="_blank" class="download-link">Link tải trực tiếp</a>
+    </li>
+    <li class="download-item">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Dropbox.png" alt="Dropbox" width="16">
+      <a href="https://www.dropbox.com/s/mplgbw5oao6ljvjmnmw2h/T-nh-l-ng.xlsx?dl=1" target="_blank" class="download-link">Link dự phòng</a>
+    </li>
+    <li class="download-item">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Apple.png" alt="Apple" width="16">
+      <a href="https://www.icloud.com/iclouddrive/0b3bNlgrOqzB2b32wjh1x9pjw" target="_blank" class="download-link">Link tải về iPhone</a>
+    </li>
+    <li class="download-item">
+      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Excel.png" alt="Excel" width="16">
+      <a href="https://1drv.ms/x/c/6c3a670f4fe04eaf/EfyaGkUWCKBMuew6Q1rmHAsBkstY3ZKjImtMHBeKtW-VGQ?e=WvphtX" target="_blank" class="download-link">Link mở trong ứng dụng Excel</a>
+    </li>
+  </ul>
+</div>
+
+<div class="info-section">
+  <h4>📌 Quy tắc tính bảo hiểm, tăng ca, trợ cấp và chuyên cần</h4>
+  <ul>
+    <li><strong>Bảo hiểm:</strong> = Lương cơ bản + PC thâm niên + PC chức vụ</li>
+    <li><strong>Tăng ca:</strong> = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</li>
+    <li><strong>Ngày công chuẩn:</strong> Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</li>
+    <li><strong>Chuyên cần:</strong> Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</li>
+    <li><strong>PC thâm niên:</strong>
       <ul>
-        <li><strong>Bảo hiểm:</strong> = Lương cơ bản + PC thâm niên + PC chức vụ</li>
-        <li><strong>Tăng ca:</strong> = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</li>
-        <li><strong>Ngày công chuẩn:</strong> Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</li>
-        <li><strong>Chuyên cần:</strong> Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</li>
-        <li><strong>PC thâm niên:</strong>
-          <ul>
-            <li>Dưới 1 năm: 200,000 VND</li>
-            <li>Dưới 2 năm: 300,000 VND</li>
-            <li>Trên 2 năm: 400,000 VND</li>
-          </ul>
-        </li>
+        <li>Dưới 1 năm: 200000 VND</li>
+        <li>Dưới 2 năm: 300000 VND</li>
+        <li>Trên 2 năm: 400000 VND</li>
       </ul>
+    </li>
+  </ul>
 
-      <h4>🕒 Giờ tăng ca & trợ cấp đêm:</h4>
-      <ul>
-        <li><strong>150%:</strong> Tăng ca ca ngày hoặc sau 18:00</li>
-        <li><strong>200%:</strong> Tăng ca đêm (0h~1h, 4h~6h)</li>
-        <li><strong>Trợ cấp đêm 30%:</strong> 22h00 ~ 4h00</li>
-        <li><strong>Thông ca 190%:</strong> từ 17h00 trở đi (không trợ cấp đêm)</li>
-      </ul>
+  <h4>🕒 Giờ tăng ca & trợ cấp đêm:</h4>
+  <ul>
+    <li><strong>150%:</strong> Tăng ca ca ngày hoặc sau 18:00</li>
+    <li><strong>200%:</strong> Tăng ca đêm (0h~1h, 4h~6h)</li>
+    <li><strong>Trợ cấp đêm 30%:</strong> 22h00 ~ 4h00</li>
+    <li><strong>Thông ca 190%:</strong> từ 17h00 trở đi (không trợ cấp đêm)</li>
+  </ul>
 
-      <h
+  <h4>📄 Ngày lễ, tết:</h4>
+```
