@@ -1,154 +1,118 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Constants
-  const DEFAULT_VALUES = {
+  // Giá trị mặc định cho một số phụ cấp
+  const defaultValues = {
     pcDiLai: 500000,
     pcChuyenCan: 200000,
     pcThamNien: 400000
   };
 
-  // DOM Elements
-  const ELEMENTS = {
-    pcDiLai: document.getElementById("pcDiLai"),
-    pcChuyenCan: document.getElementById("pcChuyenCan"),
-    pcThamNien: document.getElementById("pcThamNien"),
-    luongCoBan: document.getElementById("luongCoBan"),
-    ngayCongChuan: document.getElementById("ngayCongChuan"),
-    tongLuong: document.getElementById("tongLuong"),
-    thucLinh: document.getElementById("thucLinh")
-  };
+  // Khởi tạo giá trị mặc định
+  document.getElementById("pcDiLai").value = defaultValues.pcDiLai;
+  document.getElementById("pcChuyenCan").value = defaultValues.pcChuyenCan;
+  document.getElementById("pcThamNien").value = defaultValues.pcThamNien;
 
-  // Initialize default values
-  ELEMENTS.pcDiLai.value = DEFAULT_VALUES.pcDiLai;
-  ELEMENTS.pcChuyenCan.value = DEFAULT_VALUES.pcChuyenCan;
-  ELEMENTS.pcThamNien.value = DEFAULT_VALUES.pcThamNien;
-
-  // Event delegation for inputs
-  document.addEventListener("input", function(e) {
-    if (e.target.matches("input, select")) {
-      tinhLuong();
-    }
-  });
-
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Enter" && e.target.matches("input, select")) {
-      e.preventDefault();
-      const inputs = Array.from(document.querySelectorAll("input, select"));
-      const currentIndex = inputs.indexOf(e.target);
-      if (currentIndex < inputs.length - 1) {
-        inputs[currentIndex + 1].focus();
+  // Tạo mảng tất cả input và select để xử lý focus Enter và cập nhật
+  const inputs = Array.from(document.querySelectorAll("input, select"));
+  inputs.forEach((input, index) => {
+    // Chuyển focus khi nhấn Enter
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const next = inputs[index + 1];
+        if (next) next.focus();
       }
-    }
+    });
+    // Tính lương ngay khi thay đổi
+    input.addEventListener("input", tinhLuong);
   });
 
-  // Main calculation function
   function tinhLuong() {
-    const luongCoBan = +ELEMENTS.luongCoBan.value || 0;
-    const ngayCongChuan = +ELEMENTS.ngayCongChuan.value || 1;
-    
-    const phuCapValues = getPhuCapValues();
-    const { luongNgayCong, luongTangCa, troCapDem } = calculateBaseRates(luongCoBan, ngayCongChuan, phuCapValues);
-    
-    const tienCong = calculateTienCong(luongNgayCong, luongTangCa, troCapDem);
-    const tienBangPhu = calcBangPhu(luongNgayCong, luongTangCa, troCapDem);
-    const phuCapTong = calculateTotalPhuCap(phuCapValues);
-    
-    const tongThuNhap = tienCong.total + tienBangPhu + phuCapTong;
-    updateTotalDisplay(tongThuNhap, luongCoBan, phuCapValues);
-  }
+    // Lấy dữ liệu đầu vào
+    const luongCoBan = +document.getElementById("luongCoBan").value || 0;
+    const ngayCongChuan = +document.getElementById("ngayCongChuan").value || 1;
+    const phuCapThamNien = +document.getElementById("pcThamNien").value || 0;
+    const phuCapChucVu = +document.getElementById("pcChucVu").value || 0;
+    const hoTroDiLai = +document.getElementById("pcDiLai").value || 0;
 
-  // Helper functions
-  function getPhuCapValues() {
-    return {
-      pcThamNien: +document.getElementById("pcThamNien").value || 0,
-      pcChucVu: +document.getElementById("pcChucVu").value || 0,
-      pcDiLai: +document.getElementById("pcDiLai").value || 0,
-      pcABC: +document.getElementById("pcABC").value || 0,
-      pcChuyenCan: +document.getElementById("pcChuyenCan").value || 0,
-      pcDienThoai: +document.getElementById("pcDienThoai").value || 0,
-      pcTreEm: +document.getElementById("pcTreEm").value || 0,
-      pcKhac: +document.getElementById("pcKhac").value || 0
-    };
-  }
-
-  function calculateBaseRates(luongCoBan, ngayCongChuan, phuCapValues) {
+    // Lương cơ bản phân theo ngày và giờ
     const luongNgayCong = luongCoBan / ngayCongChuan;
-    const luongTangCa = (luongCoBan + phuCapValues.pcThamNien + phuCapValues.pcChucVu + phuCapValues.pcDiLai) / ngayCongChuan / 8;
+    const luongTangCa = (luongCoBan + phuCapThamNien + phuCapChucVu + hoTroDiLai) / ngayCongChuan / 8;
     const troCapDem = luongTangCa;
-    
-    return { luongNgayCong, luongTangCa, troCapDem };
-  }
 
-  function calculateTienCong(luongNgayCong, luongTangCa, troCapDem) {
-    const calculations = [
-      { idSo: "ngayCong", idTien: "tienNgayCong", calc: so => luongNgayCong * so },
-      { idSo: "tc150", idTien: "tienTC150", calc: so => luongTangCa * 1.5 * so },
-      { idSo: "tc200", idTien: "tienTC200", calc: so => luongTangCa * 2 * so },
-      { idSo: "tcDem30", idTien: "tienDem30", calc: so => troCapDem * 0.3 * so },
-      { idSo: "ngayCong200", idTien: "tienCong200", calc: so => luongNgayCong * 2 * so },
-      { idSo: "tc300", idTien: "tienTC300", calc: so => luongTangCa * 3 * so },
-      { idSo: "tc340", idTien: "tienTC340", calc: so => luongTangCa * 3.4 * so },
-      { idSo: "tcDem70", idTien: "tienDem70", calc: so => troCapDem * 0.7 * so },
-      { idSo: "phepNam", idTien: "tienPhepNam", calc: so => luongNgayCong * so },
-      { idSo: "le", idTien: "tienLe", calc: so => luongNgayCong * so }
-    ];
-
-    let total = 0;
-    calculations.forEach(({idSo, idTien, calc}) => {
+    // Hàm tính và cập nhật tiền từng loại
+    function updateTien(idSo, idTien, calc) {
       const val = +document.getElementById(idSo).value || 0;
       const tien = Math.round(calc(val));
       document.getElementById(idTien).textContent = tien.toLocaleString("vi-VN");
-      total += tien;
+      return tien;
+    }
+
+    // Tính lần lượt các khoản 100%, 150%, 200%, đêm, chủ nhật...
+    let tong = 0;
+    tong += updateTien("ngayCong", "tienNgayCong", so => luongNgayCong * so);
+    tong += updateTien("tc150", "tienTC150", so => luongTangCa * 1.5 * so);
+    tong += updateTien("tc200", "tienTC200", so => luongTangCa * 2 * so);
+    tong += updateTien("tcDem30", "tienDem30", so => troCapDem * 0.3 * so);
+    tong += updateTien("ngayCong200", "tienCong200", so => luongNgayCong * 2 * so);
+    tong += updateTien("tc300", "tienTC300", so => luongTangCa * 3 * so);
+    tong += updateTien("tc340", "tienTC340", so => luongTangCa * 3.4 * so);
+    tong += updateTien("tcDem70", "tienDem70", so => troCapDem * 0.7 * so);
+    tong += updateTien("phepNam", "tienPhepNam", so => luongNgayCong * so);
+    tong += updateTien("le", "tienLe", so => luongNgayCong * so);
+
+    // Tính tổng từ bảng phụ (giờ công hành chính, tăng ca, đêm)
+    const tienNgayLeTet = calcBangPhu(luongNgayCong, luongTangCa, troCapDem);
+    document.getElementById("tienNgayLeTet").textContent = tienNgayLeTet.toLocaleString("vi-VN");
+    tong += tienNgayLeTet;
+
+    // Cộng thêm các phụ cấp khác
+    const phuCaps = [
+      "pcABC", "pcChuyenCan", "pcThamNien",
+      "pcChucVu", "pcDiLai", "pcDienThoai",
+      "pcTreEm", "pcKhac"
+    ];
+    phuCaps.forEach(id => {
+      tong += +document.getElementById(id).value || 0;
     });
 
-    return { total };
-  }
+    // Cập nhật tổng thu nhập
+    document.getElementById("tongLuong").textContent = Math.round(tong).toLocaleString("vi-VN");
 
-  function calculateTotalPhuCap(phuCapValues) {
-    return Object.values(phuCapValues).reduce((sum, value) => sum + value, 0);
-  }
-
-  function updateTotalDisplay(tongThuNhap, luongCoBan, phuCapValues) {
-    ELEMENTS.tongLuong.textContent = Math.round(tongThuNhap).toLocaleString("vi-VN");
-    
-    const luongDongBH = luongCoBan + phuCapValues.pcThamNien + phuCapValues.pcChucVu;
+    // Khấu trừ BHXH (10.5%) và Công đoàn (1%) tính trên lương đóng BH
+    const luongDongBH = luongCoBan + phuCapThamNien + phuCapChucVu;
     const tienTruBHXH = Math.round(luongDongBH * 0.105);
     const tienTruCD = Math.round(luongDongBH * 0.01);
-    
     document.getElementById("tienTruBHXH").textContent = tienTruBHXH.toLocaleString("vi-VN");
     document.getElementById("tienTruCD").textContent = tienTruCD.toLocaleString("vi-VN");
-    
-    const thucLinh = Math.round(tongThuNhap) - tienTruBHXH - tienTruCD;
-    ELEMENTS.thucLinh.textContent = thucLinh.toLocaleString("vi-VN");
+
+    // Tính thực lĩnh
+    const thucLinh = Math.round(tong) - tienTruBHXH - tienTruCD;
+    document.getElementById("thucLinh").textContent = thucLinh.toLocaleString("vi-VN");
   }
 
+  // Hàm tính tổng của Bảng Phụ (giờ công hành chính, tăng ca, đêm)
   function calcBangPhu(luongNgayCong, luongTangCa, troCapDem) {
-    const phuLuongConfigs = [
-      { soGioId: "soGioHanhChinh1", heSoId: "phuLuongHanhChinh", rowTienId: "tienHanhChinh", loaiLuong: "hanhChinh" },
-      { soGioId: "soGioTangCa1", heSoId: "phuLuongTangCa", rowTienId: "tienTangCa", loaiLuong: "tangCa" },
-      { soGioId: "soGioDem1", heSoId: "phuLuongDem", rowTienId: "tienTroCapDem", loaiLuong: "dem" },
-      { soGioId: "soGioHanhChinh2", heSoId: "phuLuongHanhChinh2", rowTienId: "tienHanhChinh2", loaiLuong: "hanhChinh" },
-      { soGioId: "soGioTangCa2", heSoId: "phuLuongTangCa2", rowTienId: "tienTangCa2", loaiLuong: "tangCa" },
-      { soGioId: "soGioDem2", heSoId: "phuLuongDem2", rowTienId: "tienTroCapDem2", loaiLuong: "dem" }
-    ];
-
-    let tongPhu = 0;
-    phuLuongConfigs.forEach(config => {
-      const gio = +document.getElementById(config.soGioId).value || 0;
-      const heSo = +document.getElementById(config.heSoId).value || 0;
-      
+    function phuLuong(soGioId, heSoId, rowTienId, loaiLuong) {
+      const gio = +document.getElementById(soGioId).value || 0;
+      const heSo = +document.getElementById(heSoId).value || 0;
       let donGia = 0;
-      if (config.loaiLuong === "hanhChinh" || config.loaiLuong === "dem") {
+      if (loaiLuong === "hanhChinh" || loaiLuong === "dem") {
         donGia = luongNgayCong / 800;
-      } else if (config.loaiLuong === "tangCa") {
+      } else if (loaiLuong === "tangCa") {
         donGia = luongTangCa / 100;
       }
-      
       const tien = Math.round(gio * heSo * donGia);
-      document.getElementById(config.rowTienId).textContent = tien.toLocaleString("vi-VN");
-      tongPhu += tien;
-    });
+      document.getElementById(rowTienId).textContent = tien.toLocaleString("vi-VN");
+      return tien;
+    }
 
-    document.getElementById("tienNgayLeTet").textContent = tongPhu.toLocaleString("vi-VN");
+    let tongPhu = 0;
+    tongPhu += phuLuong("soGioHanhChinh1", "phuLuongHanhChinh", "tienHanhChinh", "hanhChinh");
+    tongPhu += phuLuong("soGioTangCa1", "phuLuongTangCa", "tienTangCa", "tangCa");
+    tongPhu += phuLuong("soGioDem1", "phuLuongDem", "tienTroCapDem", "dem");
+    tongPhu += phuLuong("soGioHanhChinh2", "phuLuongHanhChinh2", "tienHanhChinh2", "hanhChinh");
+    tongPhu += phuLuong("soGioTangCa2", "phuLuongTangCa2", "tienTangCa2", "tangCa");
+    tongPhu += phuLuong("soGioDem2", "phuLuongDem2", "tienTroCapDem2", "dem");
     return tongPhu;
   }
 });
