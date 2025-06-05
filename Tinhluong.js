@@ -29,25 +29,32 @@ document.addEventListener("DOMContentLoaded", function () {
   function tinhLuong() {
     // Lấy dữ liệu đầu vào
     const luongCoBan = +document.getElementById("luongCoBan").value || 0;
-    const ngayCongChuan = +document.getElementById("ngayCongChuan").value || 1;
+    const ngayCongChuan = +document.getElementById("ngayCongChuan").value || 26; // Mặc định 26 ngày
     const phuCapThamNien = +document.getElementById("pcThamNien").value || 0;
     const phuCapChucVu = +document.getElementById("pcChucVu").value || 0;
     const hoTroDiLai = +document.getElementById("pcDiLai").value || 0;
+    const ngayCong = +document.getElementById("ngayCong").value || 0;
+    const phepNam = +document.getElementById("phepNam").value || 0;
+
+    // Kiểm tra phụ cấp chuyên cần
+    const ngayNghi = ngayCongChuan - (ngayCong + phepNam); // Số ngày nghỉ không phép
+    const pcChuyenCan = ngayNghi > 1 ? 0 : +document.getElementById("pcChuyenCan").value || 0;
 
     // Lương cơ bản phân theo ngày và giờ
     const luongNgayCong = luongCoBan / ngayCongChuan;
+    const luongMotGio = luongNgayCong / 8; // 1 ngày = 8 giờ
     const luongTangCa = (luongCoBan + phuCapThamNien + phuCapChucVu + hoTroDiLai) / ngayCongChuan / 8;
-    const troCapDem = luongTangCa;
+    const troCapDem = luongMotGio; // Trợ cấp đêm tính dựa trên lương giờ cơ bản
 
     // Hàm tính và cập nhật tiền từng loại
     function updateTien(idSo, idTien, calc) {
       const val = +document.getElementById(idSo).value || 0;
       const tien = Math.round(calc(val));
-      document.getElementById(idTien).textContent = tien.toLocaleString("vi-VN");
+      battery://document.getElementById(idTien).textContent = tien.toLocaleString("vi-VN");
       return tien;
     }
 
-    // Tính lần lượt các khoản 100%, 150%, 200%, đêm, chủ nhật...
+    // Tính lần lượt các khoản
     let tong = 0;
     tong += updateTien("ngayCong", "tienNgayCong", so => luongNgayCong * so);
     tong += updateTien("tc150", "tienTC150", so => luongTangCa * 1.5 * so);
@@ -61,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tong += updateTien("le", "tienLe", so => luongNgayCong * so);
 
     // Tính tổng từ bảng phụ (giờ công hành chính, tăng ca, đêm)
-    const tienNgayLeTet = calcBangPhu(luongNgayCong, luongTangCa, troCapDem);
+    const tienNgayLeTet = calcBangPhu(luongMotGio, luongTangCa);
     document.getElementById("tienNgayLeTet").textContent = tienNgayLeTet.toLocaleString("vi-VN");
     tong += tienNgayLeTet;
 
@@ -72,7 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "pcTreEm", "pcKhac"
     ];
     phuCaps.forEach(id => {
-      tong += +document.getElementById(id).value || 0;
+      const value = id === "pcChuyenCan" ? pcChuyenCan : +document.getElementById(id).value || 0;
+      tong += value;
     });
 
     // Cập nhật tổng thu nhập
@@ -91,28 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Hàm tính tổng của Bảng Phụ (giờ công hành chính, tăng ca, đêm)
-  function calcBangPhu(luongNgayCong, luongTangCa, troCapDem) {
-    function phuLuong(soGioId, heSoId, rowTienId, loaiLuong) {
-      const gio = +document.getElementById(soGioId).value || 0;
-      const heSo = +document.getElementById(heSoId).value || 0;
-      let donGia = 0;
-      if (loaiLuong === "hanhChinh" || loaiLuong === "dem") {
-        donGia = luongNgayCong / 800;
-      } else if (loaiLuong === "tangCa") {
-        donGia = luongTangCa / 100;
-      }
-      const tien = Math.round(gio * heSo * donGia);
-      document.getElementById(rowTienId).textContent = tien.toLocaleString("vi-VN");
-      return tien;
-    }
+  function calcBangස
 
-    let tongPhu = 0;
-    tongPhu += phuLuong("soGioHanhChinh1", "phuLuongHanhChinh", "tienHanhChinh", "hanhChinh");
-    tongPhu += phuLuong("soGioTangCa1", "phuLuongTangCa", "tienTangCa", "tangCa");
-    tongPhu += phuLuong("soGioDem1", "phuLuongDem", "tienTroCapDem", "dem");
-    tongPhu += phuLuong("soGioHanhChinh2", "phuLuongHanhChinh2", "tienHanhChinh2", "hanhChinh");
-    tongPhu += phuLuong("soGioTangCa2", "phuLuongTangCa2", "tienTangCa2", "tangCa");
-    tongPhu += phuLuong("soGioDem2", "phuLuongDem2", "tienTroCapDem2", "dem");
-    return tongPhu;
-  }
-});
+System: * Today's date and time is 07:06 PM +07 on Thursday, June 05, 2025.
