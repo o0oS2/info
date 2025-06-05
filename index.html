@@ -365,10 +365,24 @@
       .input-row {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
       }
 
       .input-group {
         justify-content: space-between;
+        width: 100%;
+      }
+
+      .input-group label {
+        font-size: 0.85rem;
+        flex-shrink: 0;
+      }
+
+      .input-group input,
+      .input-group select {
+        min-width: 100px;
+        flex: 1;
+        max-width: 150px;
       }
 
       .salary-table {
@@ -377,7 +391,7 @@
 
       .salary-table th,
       .salary-table td {
-        padding: 8px;
+        padding: 8px 6px;
       }
 
       .contact-links {
@@ -395,13 +409,35 @@
         font-size: 1.4rem;
       }
 
-      .salary-table {
+      .input-group {
         font-size: 0.8rem;
+      }
+
+      .input-group label {
+        font-size: 0.8rem;
+      }
+
+      .input-group input,
+      .input-group select {
+        padding: 6px 8px;
+        font-size: 0.85rem;
+        min-width: 80px;
+        max-width: 120px;
+      }
+
+      .salary-table {
+        font-size: 0.75rem;
       }
 
       .salary-table th,
       .salary-table td {
-        padding: 6px;
+        padding: 6px 4px;
+      }
+
+      .salary-table input,
+      .salary-table select {
+        padding: 4px 6px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -508,7 +544,7 @@
             <td>
               <select id="pcChuyenCan">
                 <option value="0">0</option>
-                <option value="200000" selected>200,000</option>
+                <option value="200000" selected>200000</option>
               </select>
             </td>
           </tr>
@@ -516,9 +552,9 @@
             <td colspan="2">⭐ Phụ cấp thâm niên</td>
             <td>
               <select id="pcThamNien">
-                <option value="200000">200,000</option>
-                <option value="300000">300,000</option>
-                <option value="400000" selected>400,000</option>
+                <option value="200000">200000</option>
+                <option value="300000">300000</option>
+                <option value="400000" selected>400000</option>
               </select>
             </td>
           </tr>
@@ -527,7 +563,7 @@
             <td>
               <select id="pcChucVu">
                 <option value="0" selected>0</option>
-                <option value="100000">100,000</option>
+                <option value="100000">100000</option>
               </select>
             </td>
           </tr>
@@ -540,11 +576,11 @@
             <td>
               <select id="pcDienThoai">
                 <option value="0" selected>0</option>
-                <option value="1500000">1,500,000</option>
-                <option value="2500000">2,500,000</option>
-                <option value="3000000">3,000,000</option>
-                <option value="4000000">4,000,000</option>
-                <option value="5000000">5,000,000</option>
+                <option value="1500000">1500000</option>
+                <option value="2500000">2500000</option>
+                <option value="3000000">3000000</option>
+                <option value="4000000">4000000</option>
+                <option value="5000000">5000000</option>
               </select>
             </td>
           </tr>
@@ -553,10 +589,10 @@
             <td>
               <select id="pcTreEm">
                 <option value="0" selected>0</option>
-                <option value="50000">50,000</option>
-                <option value="100000">100,000</option>
-                <option value="150000">150,000</option>
-                <option value="200000">200,000</option>
+                <option value="50000">50000</option>
+                <option value="100000">100000</option>
+                <option value="150000">150000</option>
+                <option value="200000">200000</option>
               </select>
             </td>
           </tr>
@@ -726,12 +762,4 @@
         <ul class="download-links">
           <li>
             <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Github.png" width="16">
-            <a href="https://github.com/o0oS2/Tinh-luong/raw/refs/heads/main/Ti%CC%81nh%20lu%CC%9Bo%CC%9Bng.xlsx" target="_blank">Link tải trực tiếp</a>
-          </li>
-          <li>
-            <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Dropbox.png" width="16">
-            <a href="https://www.dropbox.com/s/mplgbw5oao6ljvjmnmw2h/T-nh-l-ng.xlsx?dl=1" target="_blank">Link dự phòng</a>
-          </li>
-          <li>
-            <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Apple.png" width="16">
-            <a href="https://www.icloud.com/iclouddrive/
+            <a href="https://github.com/o0oS2/Tinh-lu
