@@ -1,573 +1,465 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tính Lương - Đức Trung</title>
-<link rel="icon" href="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Icon.png" type="image/png" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 30px;
-    }
-    h1 {
-      text-align: center;
-      color: #007bff;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      background: #fff;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: center;
-      vertical-align: middle; /* Canh giữa theo chiều dọc */
-    }
-    th {
-      background: #007bff;
-      color: white;
-    }
-    /* CHỈNH INPUT/SELECT NẰM TRONG BẢNG */
-table input[type="number"],
-table input[type="text"],
-table select {
-  width: 100%;               /* Chiếm hết chiều rộng ô */
-  box-sizing: border-box;   /* Padding không làm vượt quá ô */
-  padding: 2px 6px;         /* Giảm padding để chiều cao thấp hơn */
-  font-size: 12px;          /* Giảm cỡ chữ xuống 12px */
-  text-align: right;        /* Căn phải với số */
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  height: 24px;             /* Đặt chiều cao cụ thể để đều */
-}
-
-/* ==== CHỈNH KÍCH THƯỚC CỘT BẢNG CHÍNH ==== */
-#luongContainer table > thead > tr > th:nth-child(1),
-#luongContainer table > tbody > tr > td:nth-child(1) {
-  width: 43%;
-  text-align: left;
-  padding-left: 15px;
-}
-
-#luongContainer table > thead > tr > th:nth-child(2),
-#luongContainer table > tbody > tr > td:nth-child(2) {
-  width: 23%;
-}
-
-#luongContainer table > thead > tr > th:nth-child(3),
-#luongContainer table > tbody > tr > td:nth-child(3) {
-  width: 34%;
-  text-align: right;
-  padding-right: 15px;
-}
-/* ==== CHỈNH KÍCH THƯỚC CỘT BẢNG PHỤ ==== */
-#bangPhu table td:nth-child(1),
-#bangPhu table th:nth-child(1) {
-  width: 5%;
-}
-#bangPhu table td:nth-child(2),
-#bangPhu table th:nth-child(2) {
-  width: 58%;
-}
-#bangPhu table td:nth-child(3),
-#bangPhu table th:nth-child(3) {
-  width: 10%;
-  min-width: 50px;
-  max-width: 100px
-}
-#bangPhu table td:nth-child(4),
-#bangPhu table th:nth-child(4) {
-  width: 15%;
-  min-width: 50px;
-  max-width: 100px
-}
-#bangPhu table td:nth-child(5),
-#bangPhu table th:nth-child(5) {
-  width: 22%;
-}
-#luongContainer table th,
-#luongContainer table td {
-  padding: 1px 2px;       /* Giảm padding như bảng phụ */
-  height: 20px;           /* Chiều cao dòng tương tự bảng phụ */
-  vertical-align: middle; /* Canh giữa theo chiều dọc */
-}
-
-#luongContainer table input[type="number"],
-#luongContainer table input[type="text"],
-#luongContainer table select {
-  padding: 1px 2px;       /* Giảm padding input */
-  height: 20px;           /* Chiều cao input nhỏ gọn */
-  font-size: 13px;        /* Cỡ chữ nhỏ */
-  box-sizing: border-box;
-  text-align: right;
-}
-
-#bangPhu table td,
-#bangPhu table th {
-  padding: 4px 6px;       /* Giảm padding lại để dòng thấp hơn */
-  height: 24px;           /* Đặt chiều cao dòng thấp */
-  vertical-align: middle; /* Canh giữa theo chiều dọc */
-}
-
-#bangPhu table input[type="number"] {
-  padding: 2px 6px;       /* Giảm padding input */
-  height: 22px;           /* Giảm chiều cao input */
-  font-size: 12px;        /* Giảm cỡ chữ */
-  box-sizing: border-box;
-}
-
-table th,
-table td {
-  height: 18px; /* Bạn có thể thay đổi thành 30px, 40px, tùy ý */
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-input[type="number"],
-select {
-  padding: 4px 6px;    /* Giảm padding để ô thấp hơn */
-  font-size: 12px;     /* Giảm cỡ chữ nếu cần */
-  height: 28px;        /* Có thể thêm dòng này để kiểm soát chiều cao */
-}
-
-    /* Nếu muốn căn giữa text trong input, đổi text-align thành center */
-    /*
-    table input[type="number"],
-    table input[type="text"],
-    table select {
-      text-align: center;
-    }
-    */
-    tfoot td {
-      font-weight: bold;
-      background: #e9f7ef;
-    }
-    .center {
-      text-align: center;
-      margin-top: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 5px;
-    }
-    button:hover {
-      background: #218838;
-    }
-    #bangPhu {
-      margin-top: 10px;
-    }
-    #bangPhu th {
-      background: #28a745;
-    }
-    #bangPhu td, #bangPhu th {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    /* ===== PHẦN CHỈNH CHO LƯƠNG CƠ BẢN VÀ NGÀY CÔNG CHUẨN CÙNG DÒNG ===== */
-    .input-row {
-      display: flex;
-      flex-wrap: wrap; /* Cho phép xuống dòng nếu quá nhỏ */
-      align-items: center;
-      gap: 2px; /* Khoảng cách giữa các phần tử */
-      margin-bottom: 2px;
-      justify-content: center;
-    }
-    .input-row label {
-      white-space: nowrap;
-      font-size: 18px;
-      color: green;
-    }
-.input-row input[type="number"],
-.input-row select {
-  width: 160px;
-  min-width: 80px;
-  text-align: right;
-  font-size: 20px;
-  padding: 4px 6px;
-  height: 20px; /* hoặc 24px nếu muốn thấp hơn nữa */
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-#ngayCongChuan {
-  height: 30px;
-  font-size: 16px;
-  padding: 4px 6px;
-}
-.input-item {
-  display: flex;
-  flex-direction: column;
-  margin: 0 10px 8px 0;
-  min-width: 140px; /* hoặc 100% nếu muốn full width trên mobile */
-}
-
-@media screen and (max-width: 768px) {
-  .input-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .input-item {
-    width: 100%;         /* full width trên điện thoại */
-  }
-  .input-item label {
-    font-size: 16px;
-    margin-bottom: 2px;
-  }
-  .input-item input,
-  .input-item select {
-    font-size: 16px;
-    height: 30px;
-  }
-}
-    /* Responsive cho màn hình nhỏ */
-    @media screen and (max-width: 768px) {
-      body {
-        padding: 10px;
-      }
-      table {
-        font-size: 14px;
-      }
-      table input[type="number"],
-      table input[type="text"],
-      table select {
-        width: 100%;    /* Chiếm hết chiều rộng trên mobile */
-        font-size: 16px;
-        padding: 10px 8px;
-      }
-      label, select {
-        display: block;
-        margin-top: 10px;
-        margin-bottom: 5px;
-      }
-      button {
-        width: 100%;
-        font-size: 16px;
-      }
-      th, td {
-        padding: 6px;
-      }
-      h1 {
-        font-size: 22px;
-      }
-      /* Chỉnh lại .input-row trên mobile */
-      .input-row {
-        justify-content: center;
-      }
-      .input-row label {
-        font-size: 18px;
-      }
-      .input-row input[type="number"],
-      .input-row select {
-        width: 100px;
-        font-size: 16px;
-      }
-    }
-#bangPhu table td:nth-child(4) input[type="number"] {
-  width: 100%;           /* Chiếm toàn bộ chiều rộng ô */
-  font-size: 13px;
-  padding: 2px 6px;
-  height: 22px;
-  text-align: right;
-  box-sizing: border-box;
-}
-/* Giới hạn chiều rộng bảng trên máy tính */
-#luongContainer, #bangPhu {
-  max-width: 600px;
-  margin: 0 auto; /* Căn giữa */
-}
-
-
-  </style>
+    <meta charset="UTF-8">
+    <title>Đề Thi Lý Thuyết 3D</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .timer {
+            text-align: center;
+            font-size: 24px;
+            color: red;
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
-<h1 style="text-align: center; margin-bottom: 4px;">BẢNG TÍNH LƯƠNG</h1>
 
-  <div class="input-row">
-  <div class="input-item">
-    <label for="luongCoBan">Lương cơ bản:</label>
-    <input type="number" id="luongCoBan" value="" />
-  </div>
+<h1>ĐỀ THI LÝ THUYẾT KỸ THUẬT VIÊN 3D</h1>
+<div class="timer" id="countdown">Thời gian còn lại: 15:00</div>
 
-  <div class="input-item">
-    <label for="ngayCongChuan">Ngày công chuẩn:</label>
-    <select id="ngayCongChuan" name="ngayCongChuan">
-      <option value="24">24</option>
-      <option value="25">25</option>
-      <option value="26" selected>26</option>
-    </select>
-  </div>
-</div>
+<form id="quizForm">
 
-  <div id="luongContainer">
-    <table>
-      <thead>
-        <tr>
-          <th>Khoản mục</th>
-          <th>Thời gian</th>
-          <th>Thành tiền</th>
-        </tr>
-      </thead>
-      <tbody id="luongTable">
-        <tr><td>Ngày công 100%</td><td><input type="number" id="ngayCong" placeholder="ngày" /></td><td id="tienNgayCong">0</td></tr>
-        <tr><td>Tăng ca 150%</td><td><input type="number" id="tc150" placeholder="giờ" /></td><td id="tienTC150">0</td></tr>
-        <tr><td>Tăng ca 200%</td><td><input type="number" id="tc200" placeholder="giờ" /></td><td id="tienTC200">0</td></tr>
-        <tr><td>Trợ cấp đêm 30%</td><td><input type="number" id="tcDem30" placeholder="giờ" /></td><td id="tienDem30">0</td></tr>
-        <tr style="color:red;"><td>Ngày công 200%</td><td><input type="number" id="ngayCong200" placeholder="ngày" /></td><td id="tienCong200">0</td></tr>
-        <tr style="color:red;"><td>Tăng ca 300%</td><td><input type="number" id="tc300" placeholder="giờ" /></td><td id="tienTC300">0</td></tr>
-        <tr style="color:red;"><td>Tăng ca 340%</td><td><input type="number" id="tc340" placeholder="giờ" /></td><td id="tienTC340">0</td></tr>
-        <tr style="color:red;"><td>Trợ cấp đêm 70%</td><td><input type="number" id="tcDem70" placeholder="giờ" /></td><td id="tienDem70">0</td></tr>
-        <tr><td>Ngày phép năm</td><td><input type="number" id="phepNam" placeholder="ngày" /></td><td id="tienPhepNam">0</td></tr>
-        <tr><td>Ngày lễ</td><td><input type="number" id="le" placeholder="ngày" /></td><td id="tienLe">0</td></tr>
-        <tr><td colspan="2">Phụ cấp ABC</td><td><input type="number" id="pcABC" /></td></tr>
-        <tr><td colspan="2">Phụ cấp Chuyên cần</td><td>
-          <select id="pcChuyenCan">
-            <option value="0">0</option>
-            <option value="200000" selected>200000</option>
-          </select>
-        </td></tr>
-        <tr><td colspan="2">Phụ cấp thâm niên</td><td>
-          <select id="pcThamNien">
-            <option value="200000">200000</option>
-            <option value="300000">300000</option>
-            <option value="400000">400000</option>
-          </select>
-        </td></tr>
-        <tr><td colspan="2">Phụ cấp chức vụ</td><td>
-          <select id="pcChucVu">
-            <option value="0">0</option>
-            <option value="100000">100000</option>
-          </select>
-        </td></tr>
-        <tr><td colspan="2">Hỗ trợ đi lại</td><td><input type="number" id="pcDiLai" /></td></tr>
-        <tr><td colspan="2">Hỗ trợ điện thoại</td><td>
-          <select id="pcDienThoai">
-            <option value="0">0</option>
-            <option value="1500000">1500000</option>
-            <option value="2500000">2500000</option>
-            <option value="3000000">3000000</option>
-            <option value="4000000">4000000</option>
-            <option value="5000000">5000000</option>
-          </select>
-        </td></tr>
-        <tr><td colspan="2">Hỗ trợ trẻ em dưới 6 tuổi</td><td>
-          <select id="pcTreEm">
-            <option value="0">0</option>
-            <option value="50000">50000</option>
-            <option value="100000">100000</option>
-            <option value="150000">150000</option>
-            <option value="200000">200000</option>
-          </select>
-        </td></tr>
-        <tr><td colspan="2">Phụ cấp khác</td><td><input type="number" id="pcKhac" /></td></tr>
-        <tr><td colspan="2">Lương ngày lễ, tết, thông ca</td><td id="tienNgayLeTet">0</td></tr>
-        <tr style="background-color: yellow;"><td colspan="2">Tổng thu nhập</td><td id="tongLuong">0</td></tr>
-        <tr style="color:red;"><td colspan="2">Khấu trừ BHXH 10.5%</td><td id="tienTruBHXH">0</td></tr>
-        <tr style="color:red;"><td colspan="2">Khấu trừ Công đoàn 1%</td><td id="tienTruCD">0</td></tr>
-        <tr style="background-color: #cce5ff; font-weight: bold;"><td colspan="2">Thực lĩnh (chưa tính thuế)</td><td id="thucLinh">0</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-<div id="bangPhu">
-<h3 style="text-align: center; color: red; margin-top: 8px; margin-bottom: 8px;">Lương ngày lễ, tết, thông ca</h3>
-
-    <table>
-      <thead>
-        <tr>
-          <th rowspan="2">Ngày</th>
-          <th rowspan="2">Khoản mục</th>
-          <th rowspan="2">Giờ</th>
-          <th rowspan="2">% lương</th>
-          <th rowspan="2">Thành tiền</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td rowspan="3"><input type="number" /></td>
-          <td>Giờ hành chính</td>
-          <td><input type="number" id="soGioHanhChinh1" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongHanhChinh" /></td>
-          <td id="tienHanhChinh">0</td>
-        </tr>
-        <tr>
-          <td>Tăng ca, thông ca</td>
-          <td><input type="number" id="soGioTangCa1" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongTangCa" /></td>
-          <td id="tienTangCa">0</td>
-        </tr>
-        <tr>
-          <td>Trợ cấp đêm</td>
-          <td><input type="number" id="soGioDem1" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongDem" /></td>
-          <td id="tienTroCapDem">0</td>
-        </tr>
-        <tr>
-          <td rowspan="3"><input type="number" /></td>
-          <td>Giờ hành chính</td>
-          <td><input type="number" id="soGioHanhChinh2" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongHanhChinh2" /></td>
-          <td id="tienHanhChinh2">0</td>
-        </tr>
-        <tr>
-          <td>Tăng ca, thông ca</td>
-          <td><input type="number" id="soGioTangCa2" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongTangCa2" /></td>
-          <td id="tienTangCa2">0</td>
-        </tr>
-        <tr>
-          <td>Trợ cấp đêm</td>
-          <td><input type="number" id="soGioDem2" placeholder="giờ" /></td>
-          <td><input type="number" id="phuLuongDem2" /></td>
-          <td id="tienTroCapDem2">0</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-<div style="margin: 5px 0; padding: 4px 8px; border: 1px solid #ccc; border-radius: 6px;">
-  <p style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 10px; margin-bottom: 0;">
-    <span>Liên hệ:</span>
-    <a href="https://m.facebook.com/tdt93/" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="20" height="20" style="margin-right: 4px;">
-      <span style="color: #1877F2; font-weight: bold;">Facebook</span>
-    </a>
-    <a href="http://zalo.me/trungpl" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" alt="Zalo" width="20" height="20" style="margin-right: 4px;">
-      <span style="color: #0068FF; font-weight: bold;">Zalo</span>
-    </a>
-  </p>  
-<div style="text-align:center; margin-top:10px; font-weight:bold; line-height:0.8;">
-  <p>Ủng hộ tôi qua <span style="color:red;">Vietin</span><span style="color:blue;">Bank</span></p>
-  <p>Chủ TK: <span style="color:blue;">Trần Đức Trung</span></p>
-  <p>STK: 
-    <span id="stk" style="color:blue;">102829132222</span>
-    <button 
-      onclick="copySTK()" 
-      style="
-        margin-left:10px; 
-        padding: 0 8px; 
-        max-width: 70px; 
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis; 
-        font-size: 14px; 
-        cursor: pointer; 
-        margin-top: 0; 
-        margin-bottom: 0;
-        line-height: 1;
-        height: 20px;
-        vertical-align: middle;
-        border: none;
-        border-radius: 4px;
-        background-color: #007bff;
-        color: white;
-      "
-    >Copy</button>
-  </p>
-  <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="Vietinbank QR" style="height:320px;">
-</div>
-
+<!-- Các câu hỏi sẽ được chèn ở đây -->
 <script>
-  function copySTK() {
-    const stkText = document.getElementById("stk").innerText;
-    navigator.clipboard.writeText(stkText).then(() => {
-      alert("Đã sao chép số tài khoản: " + stkText);
-    }).catch(err => {
-      alert("Lỗi khi sao chép!");
-      console.error("Clipboard copy failed:", err);
+const answers = {
+    "1": "B",
+    "2": "C",
+    "3": "E",
+    "4": "B",
+    "5": "B",
+    "6": "D",
+    "7": "F",
+    "8": "C",
+    "9": "A",
+    "10": "D",
+    "11": "C",
+    "12": "D",
+    "13": "B",
+    "14": "D",
+    "15": "D",
+    "16": "B",
+    "17": "A",
+    "18": "A",
+    "19": "B",
+    "20": "B",
+    "21": "E",
+    "22": "B",
+    "23": "C",
+    "24": "B",
+    "25": "C",
+    "26": "A",
+    "27": "B",
+    "28": "B",
+    "29": "A",
+    "30": "D",
+    "31": "E",
+    "32": "A",
+    "33": "C",
+    "34": "C",
+    "35": "E",
+    "36": "C",
+    "37": "C",
+    "38": "D",
+    "39": "D",
+    "40": "A",
+    "41": "B",
+    "42": "D",
+    "43": "B",
+    "44": "C",
+    "45": "D",
+    "46": "A",
+    "47": "D",
+    "48": "C",
+    "49": "A",
+    "50": "A",
+    "51": "B",
+    "52": "B",
+    "53": "C",
+    "54": "A",
+    "55": "A",
+    "56": "C",
+    "57": "B",
+    "58": "A",
+    "59": "A",
+    "60": "C"
+};
+
+const questions = [
+    {
+        "no": 1,
+        "text": "Máy đo 3D là dạng máy đo tọa độ 3 chiều (X, Y, Z).",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 2,
+        "text": "Cách điều chỉnh độ sáng khi không nhìn rõ điểm cần bắt trên máy đo 3D.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 3,
+        "text": "Cách chuẩn bị trước khi đo mẫu.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 4,
+        "text": "Cài đặt chương trình, tọa độ phải giống như bản vẽ quy định.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 5,
+        "text": "Đo lần lượt theo chương trình đã được cài đặt trước đó.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 6,
+        "text": "Vì máy đo 3D là máy đo tọa độ 3 chiều có độ chính xác cao.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 7,
+        "text": "Chênh lệch dung sai giữa máy đo 3D và vision ngoài sản xuất khoảng 0.02 mm.",
+        "options": ["A", "B", "C", "D", "E", "F"]
+    },
+    {
+        "no": 8,
+        "text": "Ấn nút load dữ liệu (Export) tự động trên chương trình đo 3D để tải về máy.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 9,
+        "text": "Máy đo 3D có được hiệu chuẩn định kỳ không?",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 10,
+        "text": "Nhân viên vận hành trực tiếp máy đo là người cài và nếu khó khăn mới cần sự trợ giúp từ quản lý cấp trên hoặc bộ phận liên quan.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 11,
+        "text": "Đo được toàn bộ các kích thước ở 3 chiều (X, Y, Z). Và chỉ ở một số kích thước ngoại lệ không bắt được điểm mới không đo được.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 12,
+        "text": "Trên 300X.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 13,
+        "text": "Không đo được.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 14,
+        "text": "Vì khi cài điểm gốc tọa độ trước thì khi lấy điểm đo ở các vị trí mới chính xác.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 15,
+        "text": "Máy 3D là máy đo tọa độ 3 chiều (X, Y, Z). Còn máy đo 2D là máy đo 2 chiều.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 16,
+        "text": "CMM.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 17,
+        "text": "Đo 2 đường thẳng (dạng line) và lấy giao điểm của 2 đường thẳng đó tạo thành 1 điểm.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 18,
+        "text": "Đo lại bằng tay (thủ công) và điều chỉnh lại cách bắt điểm trên cung R.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 19,
+        "text": "Đo được nhưng tùy vào từng sản phẩm và khi đo độ chính xác không cao.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 20,
+        "text": "Vệ sinh 3D5S máy và kiểm tra tình trạng hoạt động của máy trước khi sử dụng.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 21,
+        "text": "Milimet và inch.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 22,
+        "text": "Phải đưa máy về điểm gốc, để máy khi đo di chuyển các trục cho dễ dàng và đo còn chính xác.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 23,
+        "text": "Tạo thành 1 đường thẳng.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 24,
+        "text": "Tạo thành 1 điểm.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 25,
+        "text": "F3.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 26,
+        "text": "Iwp.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 27,
+        "text": "F2.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 28,
+        "text": "F2.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 29,
+        "text": "Summary.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 30,
+        "text": "Other (Playback Options...).",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 31,
+        "text": "Tất cả các ý trên đều trích xuất được kết quả ra hàng ngang.",
+        "options": ["A", "B", "C", "D", "E", "F"]
+    },
+    {
+        "no": 32,
+        "text": ".txt.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 33,
+        "text": "Sử dụng tay điều chỉnh ống kính thủ công.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 34,
+        "text": "Khi gặp các sự cố về máy cần dừng khẩn cấp.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 35,
+        "text": "Komes Wizard.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 36,
+        "text": "Nhân viên cũ sẽ đào tạo nhân viên mới.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 37,
+        "text": "Failed to Measure.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 38,
+        "text": "InSpec Window.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 39,
+        "text": "Export -> sửa tên -> chọn định dạng Excel -> save.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 40,
+        "text": "",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 41,
+        "text": "2: di chuyển bằng tay và di chuyển bằng chuột.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 42,
+        "text": "Chọn Line -> Manual Point.",
+        "options": ["A", "B", "C", "D", "E"]
+    },
+    {
+        "no": 43,
+        "text": "Hình ảnh mà ống kính nhận diện được.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 44,
+        "text": "3.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 45,
+        "text": "4 điểm trở lên.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 46,
+        "text": "Có thể.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 47,
+        "text": "Micro Vu.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 48,
+        "text": "Ấn chuột phải chọn Move here.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 49,
+        "text": "Được.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 50,
+        "text": "Được.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 51,
+        "text": "Không được.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 52,
+        "text": "Không được.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 53,
+        "text": "Ấn chuột phải chọn Move to.",
+        "options": ["A", "B", "C", "D"]
+    },
+    {
+        "no": 54,
+        "text": "Có.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 55,
+        "text": "Có thể.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 56,
+        "text": "Có thể xem, nếu máy đó được cài phần mềm đo 3D hoặc có định dạng file tương thích với file chương trình đo.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 57,
+        "text": "Chọn theo bản vẽ quy định.",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 58,
+        "text": "%",
+        "options": ["A", "B", "C"]
+    },
+    {
+        "no": 59,
+        "text": "X đơn vị phóng đại của máy so với sản phẩm.",
+        "options": ["A", "B"]
+    },
+    {
+        "no": 60,
+        "text": "12 tháng hiệu chuẩn 1 lần.",
+        "options": ["A", "B", "C", "D"]
+    }
+];
+
+questions.forEach(q => {
+    let html = `<div class="question"><strong>Câu ${q.no}. ${q.text}</strong><br>`;
+    q.options.forEach(opt => {
+        html += `
+            <input type="radio" name="q${q.no}" value="${opt}"> ${opt}
+        `;
     });
-  }
+    html += "</div>";
+    document.write(html);
+});
+
+// Đếm ngược thời gian
+(function startTimer(duration) {
+    let timer = duration, minutes, seconds;
+    const display = document.getElementById("countdown");
+    setInterval(() => {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = "Thời gian còn lại: " + minutes + ":" + seconds;
+        if (--timer < 0) {
+            alert("Hết giờ làm bài!");
+            document.getElementById("quizForm").submit.disabled = true;
+        }
+    }, 1000);
+})(15 * 60); // 15 phút
+
+function gradeQuiz() {
+    let score = 0;
+    for (let i = 1; i <= 60; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[i]) {
+            score++;
+        }
+    }
+    alert("Bạn đạt " + score + "/60 điểm.");
+}
+
 </script>
-</div>
 
-<div style="margin: 5px 0; padding: 4px 8px; border: 1px solid #ccc; border-radius: 6px;">
-  <h3 style="margin: 4px 0 8px;">⬇ Tải file Excel chấm công ⬇</h3>
-  <p style="margin: 0 0 8px; color: #d00; font-size: 13px;">
-    ⚠ Vui lòng mở bằng trình duyệt như <strong>Safari</strong>, <strong>Chrome</strong>...<br>
-    (Không mở bằng <strong>Zalo</strong> hoặc <strong>Messenger</strong> vì có thể lỗi không tải được)
-  </p>
-  <ul style="list-style: none; padding: 0; margin: 0;">
-    <li style="margin-bottom: 6px;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Github.png" alt="GitHub" width="16" style="vertical-align: middle; margin-right: 4px;">
-      <a href="https://github.com/o0oS2/Tinh-luong/raw/refs/heads/main/Ti%CC%81nh%20lu%CC%9Bo%CC%9Bng.xlsx" target="_blank" rel="noopener noreferrer">Link tải trực tiếp</a>
-    </li>
-    <li style="margin-bottom: 6px;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Dropbox.png" alt="Dropbox" width="16" style="vertical-align: middle; margin-right: 4px;">
-      <a href="https://www.dropbox.com/s/mplgbw5oao6ljvjmnmw2h/T-nh-l-ng.xlsx?dl=1" target="_blank" rel="noopener noreferrer">Link dự phòng</a>
-    </li>
-    <li style="margin-bottom: 6px;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Apple.png" alt="Apple" width="16" style="vertical-align: middle; margin-right: 4px;">
-      <a href="https://www.icloud.com/iclouddrive/0b3bNlgrOqzB2b32wjh1x9pjw" target="_blank" rel="noopener noreferrer">Link tải về iPhone</a>
-    </li>
-    <li style="margin-bottom: 0;">
-      <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Excel.png" alt="Excel" width="16" style="vertical-align: middle; margin-right: 4px;">
-      <a href="https://1drv.ms/x/c/6c3a670f4fe04eaf/EfyaGkUWCKBMuew6Q1rmHAsBkstY3ZKjImtMHBeKtW-VGQ?e=WvphtX" target="_blank" rel="noopener noreferrer">Link mở trong ứng dụng Excel</a>
-    </li>
-  </ul>
-</div>
+<button onclick="gradeQuiz()" type="button">Chấm điểm</button>
 
-<div style="margin: 5px 0; padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; line-height: 1.4;">
-  <h4 style="margin: 4px 0 2px;">📌 Quy tắc tính bảo hiểm, tăng ca, trợ cấp và chuyên cần</h4>
-  <ul style="margin: 0 0 6px 16px; padding-left: 0;">
-    <li><b>Bảo hiểm:</b> = Lương cơ bản + PC thâm niên + PC chức vụ</li>
-    <li><b>Tăng ca:</b> = Lương cơ bản + PC thâm niên + PC chức vụ + PC đi lại</li>
-    <li><b>Ngày công chuẩn:</b> Số ngày trong tháng – số ngày Chủ nhật (tối đa 26 ngày)</li>
-    <li><b>Chuyên cần:</b> Mất nếu nghỉ việc riêng, ốm, đi muộn, về sớm > 1 ngày công (8 tiếng)</li>
-    <li><b>PC thâm niên:</b>
-      <ul style="list-style: disc; margin: 2px 0 0 20px;">
-        <li>Dưới 1 năm: 200.000 VND</li>
-        <li>Dưới 2 năm: 300.000 VND</li>
-        <li>Trên 2 năm: 400.000 VND</li>
-      </ul>
-    </li>
-  </ul>
+</form>
 
-  <h4 style="margin: 4px 0 2px;">🕒 Giờ tăng ca & trợ cấp đêm:</h4>
-  <ul style="margin: 0 0 6px 16px; padding-left: 0;">
-    <li><b>150%:</b> Tăng ca ca ngày hoặc sau 18:00</li>
-    <li><b>200%:</b> Tăng ca đêm (0h~1h, 4h~6h)</li>
-    <li><b>Trợ cấp đêm 30%:</b> 22h00 ~ 4h00</li>
-    <li><b>Thông ca 190%:</b> từ 17h00 trở đi (không trợ cấp đêm)</li>
-  </ul>
-
-  <h4 style="margin: 4px 0 2px;">📅 Ca đêm T7 & CN:</h4>
-  <ul style="margin: 0 0 6px 16px; padding-left: 0;">
-    <li><b>Ca đêm T7:</b> Trước 0h00 như ngày thường; Sau 0h00: 200%, trợ cấp đêm 70%, tăng ca 340%</li>
-    <li><b>Ca đêm CN:</b> Trước 0h00: 200%, trợ cấp đêm 70%; Sau 0h00 như ngày thường</li>
-    <li><b>Thông ca CN:</b> Sau 17h00: 380%</li>
-  </ul>
-
-  <h4 style="margin: 4px 0 2px;">🎉 Ngày lễ, Tết:</h4>
-  <ul style="margin: 0; padding-left: 16px;">
-    <li><b>Ca ngày lễ:</b> Ca ngày: 300%, tăng ca 450%</li>
-    <li><b>Ca đêm trước lễ (VD 31/12):</b> Trước 0h00 như thường; Sau 0h00: 300%, trợ cấp đêm 90%, tăng ca 510%</li>
-    <li><b>Ca đêm ngày lễ (VD 1/1):</b> Trước 0h00: 300%, trợ cấp đêm 90%; Sau 0h00: như ngày thường</li>
-    <li><b>Ca ngày Tết âm lịch:</b> 500%</li>
-    <li><b>Ca đêm Tết âm lịch:</b> 590%</li>
-  </ul>
-</div>
-
-<div style="margin: 5px 0; padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; line-height: 1.4;">
-  <h3 style="margin: 4px 0 2px; font-size: 16px;">CHẶN QUẢNG CÁO TRÊN ĐIỆN THOẠI</h3>
-  <ul style="margin: 0 0 6px 18px; padding-left: 0;">
-    <li>DNS, VPN 1.1.1.1 - Cloudflare tăng tốc Internet</li>
-    <li>Mã hoá dữ liệu an toàn, bảo mật</li>
-    <li>Chặn: mã độc, lừa đảo, theo dõi, cờ bạc, quảng cáo, nội dung độc hại...</li>
-  </ul>
-  <div style="margin-top: 2px;">
-    🔗 <a href="https://o0os2.github.io/DNS-Filter/" target="_blank" style="text-decoration: none; color: #0073e6;">Xem hướng dẫn tại đây</a>
-  </div>
-</div>
-  <script src="tinhluong.js"></script>
 </body>
 </html>
