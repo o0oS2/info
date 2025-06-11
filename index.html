@@ -57,12 +57,59 @@
       height: auto;
       border-radius: 8px;
     }
+
+    .contact-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-links a {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .contact-links img {
+      margin-right: 4px;
+    }
+
+    .phone {
+      margin-top: 6px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .phone a {
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .phone a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1></span><span style="color:blue;">TRẦN ĐỨC TRUNG</span></h1>
+    <h1>Ủng hộ tôi qua <span style="color:red;">Vietin</span><span style="color:blue;">Bank</span></h1>
     <p>Chủ TK: <span style="color:blue;">Trần Đức Trung</span></p>
+    <div class="phone">
+      <a href="tel:0346538010">📞 0346538010</a>
+    </div>
+    <div class="contact-links">
+      <a href="https://m.facebook.com/tdt93/" target="_blank">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" width="20" height="20">
+        <span style="color: #1877F2; font-weight: bold;">Facebook</span>
+      </a>
+      <a href="http://zalo.me/trungpl" target="_blank">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" width="20" height="20">
+        <span style="color: #0068FF; font-weight: bold;">Zalo</span>
+      </a>
+    </div>
     <p>
       STK: <span id="stk" style="color:blue;">102829132222</span>
       <button class="copy-btn" onclick="copySTK()">Copy</button>
@@ -83,4 +130,3 @@
   </script>
 </body>
 </html>
-
