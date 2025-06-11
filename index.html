@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trần Đức Trung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 6px 0;
+    }
+
+    #stk {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    button.copy-btn {
+      margin-left: 10px;
+      padding: 4px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      vertical-align: middle;
+      height: 26px;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1></span><span style="color:blue;">TRẦN ĐỨC TRUNG</span></h1>
+    <p>Chủ TK: <span style="color:blue;">Trần Đức Trung</span></p>
+    <p>
+      STK: <span id="stk" style="color:blue;">102829132222</span>
+      <button class="copy-btn" onclick="copySTK()">Copy</button>
+    </p>
+    <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="Mã QR VietinBank">
+  </div>
+
+  <script>
+    function copySTK() {
+      const stkText = document.getElementById("stk").innerText;
+      navigator.clipboard.writeText(stkText).then(() => {
+        alert("Đã sao chép số tài khoản: " + stkText);
+      }).catch(err => {
+        alert("Lỗi khi sao chép!");
+        console.error("Clipboard copy failed:", err);
+      });
+    }
+  </script>
+</body>
+</html>
 
