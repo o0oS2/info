@@ -26,12 +26,16 @@
       font-size: 22px;
       font-weight: bold;
       color: #007bff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .phone {
-      font-size: 17px;
+    .info-text,
+    .phone,
+    .bank-name,
+    .stk-line {
+      font-size: 16px;
       margin: 6px 0;
+      line-height: 1.4;
     }
 
     .phone a {
@@ -41,10 +45,10 @@
     }
 
     .contact-links {
-      margin: 6px 0 12px;
+      margin: 6px 0;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
@@ -61,16 +65,6 @@
       margin-right: 5px;
     }
 
-    .info-text {
-      font-size: 16px;
-      margin: 6px 0;
-    }
-
-    .bank-name {
-      font-size: 16px;
-      margin: 6px 0;
-    }
-
     .bank-name .vietin {
       color: red;
       font-weight: bold;
@@ -83,11 +77,18 @@
 
     #stk {
       font-weight: bold;
-      font-size: 18px;
+      color: blue;
+    }
+
+    .stk-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
     }
 
     button.copy-btn {
-      margin-left: 10px;
       padding: 4px 10px;
       font-size: 14px;
       cursor: pointer;
@@ -95,12 +96,12 @@
       border-radius: 4px;
       background-color: #007bff;
       color: white;
-      vertical-align: middle;
-      height: 26px;
+      height: 28px;
+      line-height: 1;
     }
 
     img.qr-img {
-      margin-top: 20px;
+      margin-top: 16px;
       width: 100%;
       max-width: 320px;
       height: auto;
@@ -126,14 +127,15 @@
     </div>
 
     <p class="info-text">Địa chỉ: Khe Thương, Yên Đổ, Phú Lương, Thái Nguyên</p>
+
     <p class="bank-name">
       Ngân hàng <span class="vietin">Vietin</span><span class="bank">Bank</span>
     </p>
 
-    <p>
-      STK: <span id="stk" style="color:blue;">102829132222</span>
+    <div class="stk-line">
+      <span>STK: <span id="stk">102829132222</span></span>
       <button class="copy-btn" onclick="copySTK()">Copy</button>
-    </p>
+    </div>
 
     <img class="qr-img" src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="Mã QR VietinBank">
   </div>
