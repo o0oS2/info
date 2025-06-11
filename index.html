@@ -76,4 +76,60 @@
       font-size: 14px;
       cursor: pointer;
       border: none;
-      borde
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      vertical-align: middle;
+      height: 26px;
+    }
+
+    img.qr-img {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Trần Đức Trung</div>
+
+    <p class="phone">📞 <a href="tel:0346538010">0346538010</a></p>
+
+    <div class="contact-links">
+      <a href="https://m.facebook.com/tdt93/" target="_blank">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Facebook.png" alt="Facebook">
+        <span style="color: #1877F2; font-weight: bold;">Facebook</span>
+      </a>
+      <a href="http://zalo.me/trungpl" target="_blank">
+        <img src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Zalo.png" alt="Zalo">
+        <span style="color: #0068FF; font-weight: bold;">Zalo</span>
+      </a>
+    </div>
+
+    <p class="info-text">Địa chỉ: Khe Thương, Yên Đổ, Phú Lương, Thái Nguyên</p>
+    <p class="info-text">Ngân hàng Vietinbank</p>
+
+    <p>
+      STK: <span id="stk" style="color:blue;">102829132222</span>
+      <button class="copy-btn" onclick="copySTK()">Copy</button>
+    </p>
+
+    <img class="qr-img" src="https://raw.githubusercontent.com/o0oS2/Tinh-luong/main/Image/Vietinbank.jpeg" alt="Mã QR VietinBank">
+  </div>
+
+  <script>
+    function copySTK() {
+      const stkText = document.getElementById("stk").innerText;
+      navigator.clipboard.writeText(stkText).then(() => {
+        alert("Đã sao chép số tài khoản: " + stkText);
+      }).catch(err => {
+        alert("Lỗi khi sao chép!");
+        console.error("Clipboard copy failed:", err);
+      });
+    }
+  </script>
+</body>
+</html>
