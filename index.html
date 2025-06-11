@@ -29,8 +29,8 @@
       margin-bottom: 10px;
     }
 
-    p {
-      font-size: 15px;
+    .phone {
+      font-size: 17px;
       margin: 6px 0;
     }
 
@@ -41,10 +41,10 @@
     }
 
     .contact-links {
-      margin: 6px 0;
+      margin: 6px 0 12px;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 20px;
       flex-wrap: wrap;
     }
 
@@ -52,17 +52,33 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     .contact-links img {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       margin-right: 5px;
     }
 
     .info-text {
-      font-size: 15px;
+      font-size: 16px;
+      margin: 6px 0;
+    }
+
+    .bank-name {
+      font-size: 16px;
+      margin: 6px 0;
+    }
+
+    .bank-name .vietin {
+      color: red;
+      font-weight: bold;
+    }
+
+    .bank-name .bank {
+      color: blue;
+      font-weight: bold;
     }
 
     #stk {
@@ -110,7 +126,9 @@
     </div>
 
     <p class="info-text">Địa chỉ: Khe Thương, Yên Đổ, Phú Lương, Thái Nguyên</p>
-    <p class="info-text">Ngân hàng Vietinbank</p>
+    <p class="bank-name">
+      Ngân hàng <span class="vietin">Vietin</span><span class="bank">Bank</span>
+    </p>
 
     <p>
       STK: <span id="stk" style="color:blue;">102829132222</span>
